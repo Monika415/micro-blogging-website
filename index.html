@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiniBlog</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>MiniBlog</h1>
+        <p>Simple Micro Blogging App</p>
+    </header>
+
+    <main>
+
+        <!-- Home Page -->
+        <section id="homePage">
+
+            <h2>People to Follow</h2>
+
+            <div id="userList"></div>
+
+        </section>
+
+
+        <!-- Profile Page -->
+        <section id="profilePage">
+
+            <button onclick="goHome()" class="backBtn">
+                ← Back
+            </button>
+
+            <div id="profileDetails"></div>
+
+            <h2>Posts</h2>
+
+            <div id="postList"></div>
+
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

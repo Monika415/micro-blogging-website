@@ -1,0 +1,196 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f2f4f7;
+    color: #222;
+}
+
+header {
+    background: #1d9bf0;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+
+header h1 {
+    margin-bottom: 5px;
+}
+
+main {
+    width: 90%;
+    max-width: 700px;
+    margin: 30px auto;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+
+/* User Card */
+
+.user-card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 2px 8px #ccc;
+}
+
+.profile-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #1d9bf0;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.user-info {
+    flex: 1;
+}
+
+.user-info h3 {
+    margin-bottom: 5px;
+}
+
+.stats {
+    color: #666;
+    font-size: 14px;
+    margin-top: 7px;
+}
+
+.viewBtn {
+    border: none;
+    background: #1d9bf0;
+    color: white;
+    padding: 9px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.viewBtn:hover {
+    background: #0d8de0;
+}
+
+
+/* Profile */
+
+#profilePage {
+    display: none;
+}
+
+.profile-box {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 8px #ccc;
+}
+
+.big-profile-img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: #1d9bf0;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.profile-box h2 {
+    margin: 12px 0 5px;
+}
+
+.bio {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.profile-stats {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.profile-stats div {
+    font-weight: bold;
+}
+
+.followBtn {
+    border: none;
+    background: #222;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.backBtn {
+    border: none;
+    background: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+
+/* Posts */
+
+.post {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px #ccc;
+}
+
+.post h3 {
+    margin-bottom: 8px;
+}
+
+.post p {
+    line-height: 1.5;
+    color: #444;
+}
+
+.likeBtn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    margin-top: 15px;
+    font-size: 15px;
+}
+
+@media (max-width: 500px) {
+
+    .user-card {
+        flex-wrap: wrap;
+    }
+
+    .viewBtn {
+        width: 100%;
+    }
+
+    .profile-stats {
+        font-size: 14px;
+    }
+}
