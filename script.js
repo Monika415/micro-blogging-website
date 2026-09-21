@@ -1,791 +1,829 @@
-document.addEventListener("DOMContentLoaded", function () {
-
-    console.log("MicroBlog started");
+console.log("MicroBlog JavaScript loaded successfully");
 
 
-    /* ==========================================
-       USER DATA
-    ========================================== */
+/* =====================================================
+   USER DATA
+===================================================== */
 
-    const users = {
+const users = {
 
-        Deepa: {
-            username: "@deepa_07",
-            avatar: "D",
-            color: "orange",
-            bio: "Exploring life one day at a time 🌸",
-            posts: 34,
-            following: 18,
-            followers: 120
-        },
+    Deepa: {
+        username: "@deepa_07",
+        avatar: "D",
+        color: "orange",
+        bio: "Exploring life one day at a time 🌸",
+        posts: 34,
+        following: 18,
+        followers: 120,
 
-        Arun: {
-            username: "@arun_talks",
-            avatar: "A",
-            color: "blue",
-            bio: "Technology • Ideas • Conversations 🚀",
-            posts: 52,
-            following: 41,
-            followers: 210
-        },
-
-        Sanjay: {
-            username: "@sanjay.dev",
-            avatar: "S",
-            color: "green",
-            bio: "Developer | Builder | Learner 💻",
-            posts: 76,
-            following: 35,
-            followers: 310
-        },
-
-        Priya: {
-            username: "@priya_19",
-            avatar: "P",
-            color: "pink",
-            bio: "Dream big. Work hard. Stay kind 🌷",
-            posts: 43,
-            following: 28,
-            followers: 145
-        },
-
-        Kavi: {
-            username: "@kavi_quotes",
-            avatar: "K",
-            color: "purple",
-            bio: "Books • Words • Thoughts 📚",
-            posts: 88,
-            following: 22,
-            followers: 560
-        }
-
-    };
+        postTexts: [
+            "Today was a beautiful day! 🌸",
+            "Enjoying every little moment of life.",
+            "Good things take time. Keep going! ✨"
+        ]
+    },
 
 
-    /* ==========================================
-       PAGE ELEMENTS
-    ========================================== */
+    Arun: {
+        username: "@arun_talks",
+        avatar: "A",
+        color: "blue",
+        bio: "Technology • Ideas • Conversations 🚀",
+        posts: 52,
+        following: 41,
+        followers: 210,
 
-    const homePage =
-        document.getElementById("homePage");
-
-    const explorePage =
-        document.getElementById("explorePage");
-
-    const messagesPage =
-        document.getElementById("messagesPage");
-
-    const savedPage =
-        document.getElementById("savedPage");
-
-    const myProfilePage =
-        document.getElementById("myProfilePage");
-
-    const userProfilePage =
-        document.getElementById("userProfilePage");
+        postTexts: [
+            "Learning something new every day. 💻",
+            "Working on a new web development project.",
+            "Technology can solve amazing problems. 🚀"
+        ]
+    },
 
 
-    const allPages = [
-        homePage,
-        explorePage,
-        messagesPage,
-        savedPage,
-        myProfilePage,
-        userProfilePage
-    ];
+    Sanjay: {
+        username: "@sanjay.dev",
+        avatar: "S",
+        color: "green",
+        bio: "Developer | Builder | Learner 💻",
+        posts: 76,
+        following: 35,
+        followers: 310,
+
+        postTexts: [
+            "Just finished building my JavaScript project!",
+            "Debugging is part of learning. 🔥",
+            "Another step forward in my developer journey."
+        ]
+    },
 
 
-    /* ==========================================
-       PAGE NAVIGATION
-    ========================================== */
+    Priya: {
+        username: "@priya_19",
+        avatar: "P",
+        color: "pink",
+        bio: "Dream big. Work hard. Stay kind 🌷",
+        posts: 43,
+        following: 28,
+        followers: 145,
 
-    function showPage(page) {
+        postTexts: [
+            "Don't compare your beginning with someone else's middle. 🌷",
+            "Keep believing in yourself.",
+            "Small progress is still progress. ✨"
+        ]
+    },
 
-        allPages.forEach(function (item) {
 
-            item.classList.add("hidden");
+    Kavi: {
+        username: "@kavi_quotes",
+        avatar: "K",
+        color: "purple",
+        bio: "Books • Words • Thoughts 📚",
+        posts: 88,
+        following: 22,
+        followers: 560,
 
-        });
+        postTexts: [
+            "Books can take us to places we have never been. 📚",
+            "A quiet evening with a good book.",
+            "Every story teaches us something."
+        ]
+    }
 
-        page.classList.remove("hidden");
+};
 
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
+
+/* =====================================================
+   GET ELEMENTS
+===================================================== */
+
+const pages = {
+
+    home: document.getElementById("homePage"),
+
+    explore: document.getElementById("explorePage"),
+
+    messages: document.getElementById("messagesPage"),
+
+    saved: document.getElementById("savedPage"),
+
+    profile: document.getElementById("myProfilePage"),
+
+    userProfile: document.getElementById("userProfilePage")
+
+};
+
+
+/* =====================================================
+   SHOW PAGE
+===================================================== */
+
+function showPage(pageName) {
+
+    Object.values(pages).forEach(function(page) {
+
+        page.classList.add("hidden");
+
+    });
+
+
+    pages[pageName].classList.remove("hidden");
+
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+/* =====================================================
+   SIDEBAR NAVIGATION
+===================================================== */
+
+document.querySelectorAll(".nav-btn").forEach(function(button) {
+
+    button.addEventListener("click", function() {
+
+        const pageName =
+            button.getAttribute("data-page");
+
+
+        document
+            .querySelectorAll(".nav-btn")
+            .forEach(function(btn) {
+
+                btn.classList.remove("active");
+
+            });
+
+
+        button.classList.add("active");
+
+
+        showPage(pageName);
+
+    });
+
+});
+
+
+/* =====================================================
+   PROFILE NAVIGATION
+===================================================== */
+
+/*
+    EVENT DELEGATION
+
+    This means even dynamically created
+    profile buttons will work.
+*/
+
+document.addEventListener("click", function(event) {
+
+    const profileElement =
+        event.target.closest(".profile-click");
+
+
+    if (!profileElement) {
+        return;
+    }
+
+
+    /*
+       Don't open profile when clicking
+       a Follow button inside the person card.
+    */
+
+    if (
+        event.target.tagName === "BUTTON"
+    ) {
+        return;
+    }
+
+
+    const userName =
+        profileElement.getAttribute("data-user");
+
+
+    if (!userName) {
+        return;
+    }
+
+
+    openUserProfile(userName);
+
+});
+
+
+/* =====================================================
+   OPEN USER PROFILE
+===================================================== */
+
+function openUserProfile(userName) {
+
+    const user = users[userName];
+
+
+    if (!user) {
+
+        console.error(
+            "User does not exist:",
+            userName
+        );
+
+        return;
 
     }
 
 
-    /* ==========================================
-       SIDEBAR NAVIGATION
-    ========================================== */
+    /* Avatar */
 
-    document
-        .querySelectorAll(".menu")
-        .forEach(function (button) {
-
-            button.addEventListener("click", function () {
-
-                document
-                    .querySelectorAll(".menu")
-                    .forEach(function (item) {
-
-                        item.classList.remove("active");
-
-                    });
+    const avatar =
+        document.getElementById("userAvatar");
 
 
-                button.classList.add("active");
+    avatar.textContent =
+        user.avatar;
 
 
-                const page =
-                    button.dataset.page;
+    avatar.className =
+        "large-avatar " + user.color;
 
 
-                if (page === "home") {
+    /* Name */
 
-                    showPage(homePage);
+    document.getElementById(
+        "userName"
+    ).textContent =
+        userName;
 
-                }
 
-                else if (page === "explore") {
+    /* Username */
 
-                    showPage(explorePage);
+    document.getElementById(
+        "userUsername"
+    ).textContent =
+        user.username;
 
-                }
 
-                else if (page === "messages") {
+    /* Bio */
 
-                    showPage(messagesPage);
+    document.getElementById(
+        "userBio"
+    ).textContent =
+        user.bio;
 
-                }
 
-                else if (page === "saved") {
+    /* Statistics */
 
-                    showPage(savedPage);
+    document.getElementById(
+        "userPosts"
+    ).textContent =
+        user.posts;
 
-                }
 
-                else if (page === "profile") {
+    document.getElementById(
+        "userFollowing"
+    ).textContent =
+        user.following;
 
-                    showPage(myProfilePage);
 
-                }
+    document.getElementById(
+        "userFollowers"
+    ).textContent =
+        user.followers;
+
+
+    /* Follow button */
+
+    const followButton =
+        document.getElementById(
+            "followButton"
+        );
+
+
+    followButton.textContent =
+        "Follow";
+
+
+    followButton.classList.remove(
+        "following"
+    );
+
+
+    /* User posts */
+
+    createUserPosts(userName);
+
+
+    /* Open page */
+
+    showPage("userProfile");
+
+}
+
+
+/* =====================================================
+   CREATE USER POSTS
+===================================================== */
+
+function createUserPosts(userName) {
+
+    const user =
+        users[userName];
+
+
+    const container =
+        document.getElementById(
+            "userPostsContainer"
+        );
+
+
+    container.innerHTML = "";
+
+
+    user.postTexts.forEach(function(text, index) {
+
+        const post =
+            document.createElement("article");
+
+
+        post.className =
+            "post-card";
+
+
+        post.innerHTML = `
+
+            <div class="avatar ${user.color}">
+                ${user.avatar}
+            </div>
+
+
+            <div class="post-main">
+
+                <div class="post-top">
+
+                    <div>
+
+                        <strong>
+                            ${userName}
+                        </strong>
+
+                        <span>
+                            ${user.username}
+                            · ${index + 1}h
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <p class="post-text">
+                    ${text}
+                </p>
+
+
+                <div class="post-actions">
+
+                    <button
+                        class="comment-button"
+                    >
+                        💬 ${index + 3}
+                    </button>
+
+
+                    <button
+                        class="share-button"
+                    >
+                        🔁 ${index + 2}
+                    </button>
+
+
+                    <button
+                        class="like-button"
+                    >
+                        ♡ ${index + 10}
+                    </button>
+
+
+                    <button
+                        class="save-button"
+                    >
+                        🔖
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        container.appendChild(post);
+
+
+        activatePostButtons(post);
+
+    });
+
+}
+
+
+/* =====================================================
+   BACK BUTTON
+===================================================== */
+
+document
+    .getElementById("backButton")
+    .addEventListener("click", function() {
+
+        showPage("home");
+
+    });
+
+
+/* =====================================================
+   MY PROFILE BUTTON
+===================================================== */
+
+document
+    .getElementById("myProfileBtn")
+    .addEventListener("click", function() {
+
+        document
+            .querySelectorAll(".nav-btn")
+            .forEach(function(btn) {
+
+                btn.classList.remove("active");
 
             });
 
-        });
+
+        showPage("profile");
+
+    });
 
 
-    /* ==========================================
-       CLICK ANY USER PROFILE
-       ========================================== */
+/* =====================================================
+   CREATE POST
+===================================================== */
 
-    document
-        .querySelectorAll(".profile-link")
-        .forEach(function (element) {
-
-            element.addEventListener("click", function () {
-
-                const username =
-                    element.dataset.user;
-
-                openProfile(username);
-
-            });
-
-        });
+const postInput =
+    document.getElementById("postInput");
 
 
-    /* ==========================================
-       OPEN PROFILE
-    ========================================== */
-
-    function openProfile(username) {
-
-        const user =
-            users[username];
+const postButton =
+    document.getElementById("postButton");
 
 
-        if (!user) {
+const characterCount =
+    document.getElementById(
+        "characterCount"
+    );
 
-            console.log(
-                "User not found:",
-                username
+
+/* Character counter */
+
+postInput.addEventListener(
+    "input",
+    function() {
+
+        const remaining =
+            280 - postInput.value.length;
+
+
+        characterCount.textContent =
+            remaining;
+
+    }
+);
+
+
+/* Post button */
+
+postButton.addEventListener(
+    "click",
+    function() {
+
+        const text =
+            postInput.value.trim();
+
+
+        /* Empty post */
+
+        if (text === "") {
+
+            showToast(
+                "Please write something first."
             );
+
+            postInput.focus();
 
             return;
 
         }
 
 
-        /*
-         * Set profile information
-         */
+        /* Create post */
 
-        const avatar =
+        const post =
+            document.createElement("article");
+
+
+        post.className =
+            "post-card";
+
+
+        post.innerHTML = `
+
+            <div class="avatar purple">
+                M
+            </div>
+
+
+            <div class="post-main">
+
+                <div class="post-top">
+
+                    <div>
+
+                        <strong>
+                            Monika
+                        </strong>
+
+                        <span>
+                            @monika_d · just now
+                        </span>
+
+                    </div>
+
+
+                    <button class="more-button">
+                        •••
+                    </button>
+
+                </div>
+
+
+                <p class="post-text"></p>
+
+
+                <div class="post-actions">
+
+                    <button class="comment-button">
+                        💬 0
+                    </button>
+
+
+                    <button class="share-button">
+                        🔁 0
+                    </button>
+
+
+                    <button class="like-button">
+                        ♡ 0
+                    </button>
+
+
+                    <button class="save-button">
+                        🔖
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        /*
+            Use textContent instead of innerHTML
+            for the user's post.
+        */
+
+        post.querySelector(
+            ".post-text"
+        ).textContent = text;
+
+
+        /*
+            Add post to top of feed
+        */
+
+        document
+            .getElementById(
+                "postsContainer"
+            )
+            .prepend(post);
+
+
+        /*
+            Activate Like / Save
+        */
+
+        activatePostButtons(post);
+
+
+        /*
+            Clear input
+        */
+
+        postInput.value = "";
+
+
+        characterCount.textContent =
+            "280";
+
+
+        /*
+            Update profile count
+        */
+
+        const myPostCount =
             document.getElementById(
-                "userAvatar"
+                "myPostCount"
             );
 
 
-        avatar.textContent =
-            user.avatar;
-
-
-        avatar.className =
-            "large-avatar " +
-            user.color;
-
-
-        document
-            .getElementById("userName")
-            .textContent = username;
-
-
-        document
-            .getElementById("userUsername")
-            .textContent = user.username;
-
-
-        document
-            .getElementById("userBio")
-            .textContent = user.bio;
-
-
-        document
-            .getElementById("userPosts")
-            .textContent = user.posts;
-
-
-        document
-            .getElementById("userFollowing")
-            .textContent =
-            user.following;
-
-
-        document
-            .getElementById("userFollowers")
-            .textContent =
-            user.followers;
+        myPostCount.textContent =
+            Number(
+                myPostCount.textContent
+            ) + 1;
 
 
         /*
-         * Create posts for this profile
-         */
+            Update overview count
+        */
 
-        createUserPosts(username);
-
-
-        /*
-         * Show profile page
-         */
-
-        showPage(userProfilePage);
-
-    }
-
-
-    /* ==========================================
-       CREATE PROFILE POSTS
-    ========================================== */
-
-    function createUserPosts(username) {
-
-        const container =
+        const overview =
             document.getElementById(
-                "userPostsContainer"
+                "overviewPostCount"
             );
 
 
-        container.innerHTML = "";
+        overview.textContent =
+            Number(
+                overview.textContent
+            ) + 1;
 
 
-        const user =
-            users[username];
-
-
-        for (let i = 1; i <= 3; i++) {
-
-            const article =
-                document.createElement("article");
-
-
-            article.className = "post";
-
-
-            article.innerHTML = `
-
-                <div
-                    class="avatar ${user.color}"
-                >
-                    ${user.avatar}
-                </div>
-
-                <div class="post-content">
-
-                    <div class="post-header">
-
-                        <div>
-
-                            <strong>
-                                ${username}
-                            </strong>
-
-                            <span>
-                                ${user.username} · ${i}h
-                            </span>
-
-                        </div>
-
-                        <button class="more">
-                            •••
-                        </button>
-
-                    </div>
-
-                    <p class="post-text">
-                        ${getPostText(username, i)}
-                    </p>
-
-                    <div class="post-actions">
-
-                        <button class="comment">
-                            💬 ${i * 4}
-                        </button>
-
-                        <button class="share">
-                            🔁 ${i * 2}
-                        </button>
-
-                        <button class="like">
-                            ♡ ${i * 15}
-                        </button>
-
-                        <button class="save">
-                            🔖
-                        </button>
-
-                    </div>
-
-                </div>
-
-            `;
-
-
-            container.appendChild(article);
-
-
-            /*
-             * Add like/save functionality
-             */
-
-            addPostActions(article);
-
-        }
+        showToast(
+            "Post published successfully!"
+        );
 
     }
+);
 
 
-    /* ==========================================
-       PROFILE POST TEXT
-    ========================================== */
+/* =====================================================
+   POST BUTTON FROM LEFT SIDEBAR
+===================================================== */
 
-    function getPostText(username, number) {
+document
+    .getElementById("sidePostButton")
+    .addEventListener("click", function() {
 
-        const posts = {
-
-            Deepa: [
-                "Today was a beautiful day. 🌸",
-                "Enjoying every little moment of life.",
-                "Good things take time. Keep going! ✨"
-            ],
-
-            Arun: [
-                "Learning something new every day. 💻",
-                "Working on a new web development project.",
-                "Technology can solve amazing problems. 🚀"
-            ],
-
-            Sanjay: [
-                "Just finished building my JavaScript project!",
-                "Debugging is part of learning. 🔥",
-                "Another step forward in my developer journey."
-            ],
-
-            Priya: [
-                "Don't compare your beginning with someone else's middle. 🌷",
-                "Keep believing in yourself.",
-                "Small progress is still progress. ✨"
-            ],
-
-            Kavi: [
-                "Books can take us to places we have never been. 📚",
-                "A quiet evening with a good book.",
-                "Every story teaches us something."
-            ]
-
-        };
+        showPage("home");
 
 
-        return posts[username][number - 1];
+        setTimeout(function() {
 
-    }
-
-
-    /* ==========================================
-       BACK BUTTON
-    ========================================== */
-
-    document
-        .getElementById("backButton")
-        .addEventListener("click", function () {
-
-            showPage(homePage);
-
-        });
+            postInput.focus();
 
 
-    /* ==========================================
-       MY PROFILE
-    ========================================== */
+            postInput.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
 
-    document
-        .getElementById("myProfileBtn")
-        .addEventListener("click", function () {
+        }, 100);
 
-            showPage(myProfilePage);
-
-        });
+    });
 
 
-    /* ==========================================
-       CREATE POST
-    ========================================== */
+/* =====================================================
+   LIKE / SAVE BUTTONS
+===================================================== */
 
-    const postInput =
-        document.getElementById(
-            "postInput"
+function activatePostButtons(post) {
+
+    const likeButton =
+        post.querySelector(
+            ".like-button"
         );
 
 
-    const postButton =
-        document.getElementById(
-            "postButton"
+    const saveButton =
+        post.querySelector(
+            ".save-button"
         );
 
 
-    const characterCount =
-        document.getElementById(
-            "characterCount"
-        );
+    /* LIKE */
 
+    if (likeButton) {
 
-    postInput.addEventListener(
-        "input",
-        function () {
-
-            characterCount.textContent =
-                280 - postInput.value.length;
-
-        }
-    );
-
-
-    postButton.addEventListener(
-        "click",
-        function () {
-
-            const text =
-                postInput.value.trim();
-
-
-            if (text === "") {
-
-                showToast(
-                    "Write something first!"
-                );
-
-                return;
-
-            }
-
-
-            const post =
-                document.createElement("article");
-
-
-            post.className = "post";
-
-
-            post.innerHTML = `
-
-                <div class="avatar purple">
-                    M
-                </div>
-
-                <div class="post-content">
-
-                    <div class="post-header">
-
-                        <div>
-
-                            <strong>
-                                Monika
-                            </strong>
-
-                            <span>
-                                @monika_d · just now
-                            </span>
-
-                        </div>
-
-                        <button class="more">
-                            •••
-                        </button>
-
-                    </div>
-
-                    <p class="post-text"></p>
-
-                    <div class="post-actions">
-
-                        <button class="comment">
-                            💬 0
-                        </button>
-
-                        <button class="share">
-                            🔁 0
-                        </button>
-
-                        <button class="like">
-                            ♡ 0
-                        </button>
-
-                        <button class="save">
-                            🔖
-                        </button>
-
-                    </div>
-
-                </div>
-
-            `;
-
-
-            /*
-             * textContent prevents HTML
-             * entered by the user from executing.
-             */
-
-            post
-                .querySelector(".post-text")
-                .textContent = text;
-
-
-            document
-                .getElementById(
-                    "postsContainer"
-                )
-                .prepend(post);
-
-
-            addPostActions(post);
-
-
-            postInput.value = "";
-
-            characterCount.textContent =
-                "280";
-
-
-            const counter =
-                document.getElementById(
-                    "myPosts"
-                );
-
-
-            if (counter) {
-
-                counter.textContent =
-                    Number(counter.textContent) + 1;
-
-            }
-
-
-            document
-                .getElementById(
-                    "overviewPosts"
-                )
-                .textContent =
-                Number(
-                    document.getElementById(
-                        "overviewPosts"
-                    ).textContent
-                ) + 1;
-
-
-            showToast(
-                "Post published successfully!"
-            );
-
-        }
-    );
-
-
-    /* ==========================================
-       POST ACTIONS
-    ========================================== */
-
-    function addPostActions(post) {
-
-        const like =
-            post.querySelector(".like");
-
-
-        const save =
-            post.querySelector(".save");
-
-
-        if (like) {
-
-            like.addEventListener(
-                "click",
-                function () {
-
-                    let text =
-                        like.textContent;
-
-
-                    let number =
-                        parseInt(
-                            text.match(/\d+/)
-                        ) || 0;
-
-
-                    if (
-                        like.classList.contains(
-                            "liked"
-                        )
-                    ) {
-
-                        number--;
-
-                        like.classList.remove(
-                            "liked"
-                        );
-
-                        like.textContent =
-                            "♡ " + number;
-
-                    } else {
-
-                        number++;
-
-                        like.classList.add(
-                            "liked"
-                        );
-
-                        like.textContent =
-                            "♥ " + number;
-
-                    }
-
-                }
-            );
-
-        }
-
-
-        if (save) {
-
-            save.addEventListener(
-                "click",
-                function () {
-
-                    save.classList.toggle(
-                        "saved"
-                    );
-
-
-                    if (
-                        save.classList.contains(
-                            "saved"
-                        )
-                    ) {
-
-                        showToast(
-                            "Post saved 🔖"
-                        );
-
-                    } else {
-
-                        showToast(
-                            "Post removed"
-                        );
-
-                    }
-
-                }
-            );
-
-        }
-
-    }
-
-
-    /*
-     * Activate actions for existing posts
-     */
-
-    document
-        .querySelectorAll(".post")
-        .forEach(function (post) {
-
-            addPostActions(post);
-
-        });
-
-
-    /* ==========================================
-       FOLLOW BUTTON
-    ========================================== */
-
-    document
-        .getElementById(
-            "followUserButton"
-        )
-        .addEventListener(
+        likeButton.addEventListener(
             "click",
-            function () {
+            function(event) {
 
-                const button =
-                    document.getElementById(
-                        "followUserButton"
+                event.stopPropagation();
+
+
+                const span =
+                    likeButton.querySelector(
+                        "span"
                     );
 
 
                 if (
-                    button.classList.contains(
-                        "following"
+                    likeButton.classList.contains(
+                        "liked"
                     )
                 ) {
 
-                    button.textContent =
-                        "Follow";
-
-                    button.classList.remove(
-                        "following"
+                    likeButton.classList.remove(
+                        "liked"
                     );
 
-                } else {
 
-                    button.textContent =
-                        "Following";
+                    let number =
+                        getButtonNumber(
+                            likeButton
+                        );
 
-                    button.classList.add(
-                        "following"
+
+                    number--;
+
+
+                    likeButton.innerHTML =
+                        "♡ " + number;
+
+                }
+
+                else {
+
+                    likeButton.classList.add(
+                        "liked"
+                    );
+
+
+                    let number =
+                        getButtonNumber(
+                            likeButton
+                        );
+
+
+                    number++;
+
+
+                    likeButton.innerHTML =
+                        "♥ " + number;
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* SAVE */
+
+    if (saveButton) {
+
+        saveButton.addEventListener(
+            "click",
+            function(event) {
+
+                event.stopPropagation();
+
+
+                saveButton.classList.toggle(
+                    "saved"
+                );
+
+
+                if (
+                    saveButton.classList.contains(
+                        "saved"
+                    )
+                ) {
+
+                    showToast(
+                        "Post saved 🔖"
+                    );
+
+                }
+
+                else {
+
+                    showToast(
+                        "Post removed from saved"
                     );
 
                 }
@@ -793,138 +831,206 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         );
 
+    }
 
-    /* ==========================================
-       SEARCH
-    ========================================== */
-
-    document
-        .getElementById("searchInput")
-        .addEventListener(
-            "input",
-            function () {
-
-                const search =
-                    this.value
-                        .toLowerCase()
-                        .trim();
+}
 
 
-                document
-                    .querySelectorAll(".post")
-                    .forEach(function (post) {
+/* =====================================================
+   GET NUMBER FROM LIKE BUTTON
+===================================================== */
 
-                        const text =
-                            post.textContent
-                                .toLowerCase();
+function getButtonNumber(button) {
 
-
-                        if (
-                            search === "" ||
-                            text.includes(search)
-                        ) {
-
-                            post.style.display =
-                                "flex";
-
-                        } else {
-
-                            post.style.display =
-                                "none";
-
-                        }
-
-                    });
-
-            }
+    const number =
+        button.textContent.match(
+            /\d+/
         );
 
 
-    /* ==========================================
-       SIDE POST BUTTON
-    ========================================== */
+    if (number) {
 
-    document
-        .getElementById(
-            "createPostSide"
-        )
-        .addEventListener(
-            "click",
-            function () {
-
-                showPage(homePage);
-
-                setTimeout(
-                    function () {
-
-                        postInput.focus();
-
-                        postInput.scrollIntoView({
-                            behavior: "smooth",
-                            block: "center"
-                        });
-
-                    },
-                    100
-                );
-
-            }
-        );
-
-
-    /* ==========================================
-       NOTIFICATION
-    ========================================== */
-
-    document
-        .getElementById(
-            "notificationBtn"
-        )
-        .addEventListener(
-            "click",
-            function () {
-
-                showToast(
-                    "You have new notifications 🔔"
-                );
-
-            }
-        );
-
-
-    /* ==========================================
-       TOAST
-    ========================================== */
-
-    function showToast(message) {
-
-        const toast =
-            document.getElementById(
-                "toast"
-            );
-
-
-        toast.textContent =
-            message;
-
-
-        toast.classList.add(
-            "show"
-        );
-
-
-        setTimeout(
-            function () {
-
-                toast.classList.remove(
-                    "show"
-                );
-
-            },
-            1800
+        return Number(
+            number[0]
         );
 
     }
 
 
-});
+    return 0;
+
+}
+
+
+/* =====================================================
+   ACTIVATE EXISTING POSTS
+===================================================== */
+
+document
+    .querySelectorAll(".post-card")
+    .forEach(function(post) {
+
+        activatePostButtons(post);
+
+    });
+
+
+/* =====================================================
+   FOLLOW BUTTON
+===================================================== */
+
+document
+    .getElementById("followButton")
+    .addEventListener(
+        "click",
+        function() {
+
+            const button =
+                document.getElementById(
+                    "followButton"
+                );
+
+
+            if (
+                button.classList.contains(
+                    "following"
+                )
+            ) {
+
+                button.textContent =
+                    "Follow";
+
+
+                button.classList.remove(
+                    "following"
+                );
+
+            }
+
+            else {
+
+                button.textContent =
+                    "Following";
+
+
+                button.classList.add(
+                    "following"
+                );
+
+            }
+
+        }
+    );
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+document
+    .getElementById("searchInput")
+    .addEventListener(
+        "input",
+        function() {
+
+            const search =
+                this.value
+                    .toLowerCase()
+                    .trim();
+
+
+            const posts =
+                document.querySelectorAll(
+                    "#postsContainer .post-card"
+                );
+
+
+            posts.forEach(function(post) {
+
+                const text =
+                    post.textContent
+                        .toLowerCase();
+
+
+                if (
+                    search === "" ||
+                    text.includes(search)
+                ) {
+
+                    post.style.display =
+                        "flex";
+
+                }
+
+                else {
+
+                    post.style.display =
+                        "none";
+
+                }
+
+            });
+
+        }
+    );
+
+
+/* =====================================================
+   NOTIFICATION
+===================================================== */
+
+document
+    .getElementById("notificationBtn")
+    .addEventListener(
+        "click",
+        function() {
+
+            showToast(
+                "You have new notifications 🔔"
+            );
+
+        }
+    );
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function showToast(message) {
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+
+    toast.textContent =
+        message;
+
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    setTimeout(function() {
+
+        toast.classList.remove(
+            "show"
+        );
+
+    }, 1800);
+
+}
+
+
+/* =====================================================
+   START HOME PAGE
+===================================================== */
+
+showPage("home");
+
+console.log(
+    "All MicroBlog functions are ready."
+);
