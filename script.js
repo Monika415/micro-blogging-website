@@ -1,199 +1,318 @@
-const followers = [
-    ["Deepa", "@deepa_07"],
-    ["Arun", "@arun_talks"],
-    ["Sanjay", "@sanjay_dev"],
-    ["Priya", "@priya_19"],
-    ["Kavi", "@kavi_quotes"]
-];
-
-const following = [
-    ["TechVibes", "@techvibes"],
-    ["NatureClicks", "@natureclicks"],
-    ["BookLover", "@booklover"],
-    ["CodeWithMe", "@codewithme"],
-    ["MusicSoul", "@musicsoul"]
-];
-
-let posts = [
-
-    [
-        "Small steps every day lead to big dreams. 🌱",
-        "#motivation #life",
-        3,
-        5,
-        16,
-        "2h"
-    ],
-
-    [
-        "The sky looks so beautiful today... ☁️",
-        "#nature #goodvibes",
-        2,
-        1,
-        12,
-        "5h"
-    ],
-
-    [
-        "Coding is not just about writing code, it's about solving real world problems. 💻",
-        "#developer #learning",
-        4,
-        7,
-        25,
-        "1d"
-    ],
-
-    [
-        "Grateful for the little things. ♡",
-        "#life #happiness",
-        1,
-        3,
-        18,
-        "2d"
-    ]
-
+const posts = [
+    {
+        text: "Small steps every day lead to big dreams. 🌱",
+        tag: "#motivation #life",
+        likes: 16,
+        comments: 3,
+        time: "2h"
+    },
+    {
+        text: "The sky looks so beautiful today... ☁️",
+        tag: "#nature #goodvibes",
+        likes: 12,
+        comments: 2,
+        time: "5h"
+    },
+    {
+        text: "Coding is not just about writing code, it's about solving real world problems. 💻",
+        tag: "#developer #learning",
+        likes: 25,
+        comments: 4,
+        time: "1d"
+    },
+    {
+        text: "Grateful for the little things. ❤️",
+        tag: "#life #happiness",
+        likes: 18,
+        comments: 1,
+        time: "2d"
+    }
 ];
 
 
-function people(list, id) {
+function displayPosts() {
 
-    document.getElementById(id).innerHTML =
-        list.map((p, i) => `
+    const container =
+        document.getElementById("postContainer");
 
-        <div class="person">
+    container.innerHTML = posts.map(
+        (post, index) => `
 
-            <div class="avatar">
-                ${p[0][0]}
-            </div>
+        <div class="post">
 
-            <div class="person-info">
-                <b>${p[0]}</b>
-                <small>${p[1]}</small>
-            </div>
-
-            <button
-                class="follow"
-                onclick="toggleFollow(this)"
-            >
-                ${id === "followers" && i === 0
-                    ? "Following"
-                    : "Follow"}
-            </button>
-
-        </div>
-
-    `).join("");
-}
-
-
-function toggleFollow(button) {
-
-    button.classList.toggle("following");
-
-    button.textContent =
-        button.classList.contains("following")
-            ? "Following"
-            : "Follow";
-}
-
-
-function render() {
-
-    document.getElementById("feed").innerHTML =
-        posts.map((p, i) => `
-
-        <article class="tweet">
-
-            <div class="avatar">
+            <div class="mini-avatar">
                 M
             </div>
 
-            <div>
+            <div class="post-content">
 
                 <h4>
                     Monika
                     <span>
-                        @monika_d · ${p[5]}
+                        @monika_d · ${post.time}
                     </span>
                 </h4>
 
                 <p>
-                    ${p[0]}
+                    ${post.text}
                     <br>
-                    <span class="muted">
-                        ${p[1]}
+                    <span style="color:#6657e8">
+                        ${post.tag}
                     </span>
                 </p>
 
-                <div class="actions">
+                <div class="post-actions">
 
-                    <span class="action">
-                        ♡ ${p[2]}
+                    <span onclick="commentPost()">
+                        💬 ${post.comments}
                     </span>
 
-                    <span class="action">
-                        ⇄ ${p[3]}
+                    <span onclick="sharePost()">
+                        🔄 Share
                     </span>
 
-                    <span
-                        class="action"
-                        onclick="this.textContent='♥ '+(${p[4]}+1)"
-                    >
-                        ♡ ${p[4]}
+                    <span onclick="likePost(${index}, this)">
+                        ❤️ ${post.likes}
+                    </span>
+
+                    <span onclick="savePost()">
+                        🔖
                     </span>
 
                 </div>
 
             </div>
 
-            <span>⋯</span>
+        </div>
 
-        </article>
-
-    `).join("");
+    `
+    ).join("");
 }
 
 
-document.getElementById("postNow").onclick = function () {
+function likePost(index, element) {
+
+    posts[index].likes++;
+
+    element.innerHTML =
+        `❤️ ${posts[index].likes}`;
+}
+
+
+function commentPost() {
+
+    alert("Comment section opened!");
+
+}
+
+
+function sharePost() {
+
+    alert("Post link copied!");
+
+}
+
+
+function savePost() {
+
+    alert("Post saved successfully!");
+
+}
+
+
+/* NAVIGATION */
+
+const navButtons =
+    document.querySelectorAll(".nav-btn");
+
+const pages =
+    document.querySelectorAll(".page");
+
+
+navButtons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        const pageName =
+            button.dataset.page;
+
+        navButtons.forEach(btn =>
+            btn.classList.remove("active")
+        );
+
+        button.classList.add("active");
+
+        pages.forEach(page =>
+            page.classList.remove("active-page")
+        );
+
+        document
+            .getElementById(pageName)
+            .classList.add("active-page");
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    });
+
+});
+
+
+/* POST */
+
+document
+    .getElementById("postBtn")
+    .addEventListener("click", createPost);
+
+
+document
+    .getElementById("postSideBtn")
+    .addEventListener("click", () => {
+
+        document
+            .getElementById("postInput")
+            .focus();
+
+    });
+
+
+function createPost() {
+
+    const input =
+        document.getElementById("postInput");
 
     const value =
-        document.getElementById("postInput").value.trim();
+        input.value.trim();
 
-    if (!value) {
+    if (value === "") {
+
+        alert("Please write something first.");
+
         return;
     }
 
-    posts.unshift([
-        value,
-        "#newpost",
-        0,
-        0,
-        0,
-        "now"
-    ]);
+    posts.unshift({
+        text: value,
+        tag: "#newpost",
+        likes: 0,
+        comments: 0,
+        time: "now"
+    });
 
-    document.getElementById("postInput").value = "";
+    input.value = "";
 
-    render();
-};
+    displayPosts();
 
-
-document.getElementById("openPost").onclick = function () {
-
-    document.getElementById("postInput").focus();
-
-};
+}
 
 
-document.getElementById("editProfile").onclick = function () {
+/* EDIT PROFILE */
 
-    alert("Profile editing is ready for your custom fields.");
+document
+    .getElementById("editProfile")
+    .addEventListener("click", editProfile);
 
-};
+document
+    .getElementById("profileEditButton")
+    .addEventListener("click", editProfile);
 
 
-people(followers, "followers");
+function editProfile() {
 
-people(following, "following");
+    const name =
+        prompt("Enter your name:", "Monika");
 
-render();
+    if (name) {
+
+        document.querySelectorAll(
+            ".profile-content h2"
+        )[0].textContent = name;
+
+        alert("Profile updated!");
+
+    }
+
+}
+
+
+/* FOLLOWERS */
+
+const followers = [
+    ["Deepa", "D"],
+    ["Arun", "A"],
+    ["Sanjay", "S"],
+    ["Priya", "P"],
+    ["Kavi", "K"]
+];
+
+
+const following = [
+    ["TechVibes", "T"],
+    ["NatureClicks", "N"],
+    ["BookLover", "B"],
+    ["CodeWithMe", "C"],
+    ["MusicSoul", "M"]
+];
+
+
+function displayPeople(data, elementId) {
+
+    document.getElementById(elementId).innerHTML =
+        data.map(person => `
+
+        <div class="person">
+
+            <div class="mini-avatar">
+                ${person[1]}
+            </div>
+
+            <div class="person-info">
+
+                <b>${person[0]}</b>
+
+                <small>
+                    @${person[0].toLowerCase()}
+                </small>
+
+            </div>
+
+            <button
+                class="follow"
+                onclick="followUser(this)"
+            >
+                Follow
+            </button>
+
+        </div>
+
+    `).join("");
+
+}
+
+
+function followUser(button) {
+
+    if (button.textContent === "Follow") {
+
+        button.textContent = "Following";
+
+        button.classList.add("following");
+
+    } else {
+
+        button.textContent = "Follow";
+
+        button.classList.remove("following");
+
+    }
+
+}
+
+
+displayPeople(followers, "followers");
+
+displayPeople(following, "following");
+
+displayPosts();
