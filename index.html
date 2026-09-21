@@ -1,49 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MiniBlog</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MicroBlog</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">♥ <span>MicroBlog</span></div>
+    <nav>
+      <button class="nav active">⌂ <span>Home</span></button>
+      <button class="nav">◉ <span>Explore</span></button>
+      <button class="nav">✉ <span>Messages</span></button>
+      <button class="nav">▱ <span>Saved</span></button>
+      <button class="nav">♙ <span>Profile</span></button>
+    </nav>
+    <button class="post-btn" id="openPost">✎ &nbsp; Post</button>
+  </aside>
 
-    <header>
-        <h1>MiniBlog</h1>
-        <p>Simple Micro Blogging App</p>
+  <main class="main">
+    <header class="topbar">
+      <div class="search">⌕ <input placeholder="Search posts, users..."></div>
+      <div class="top-actions">♧ <span class="avatar small">M</span>⌄</div>
     </header>
 
-    <main>
+    <section class="content">
+      <div class="center">
+        <div class="profile-card">
+          <div class="cover">
+            <span class="back">←</span>
+            <span class="cover-text">Better<br>Things<br>Ahead ♡</span>
+          </div>
+          <div class="profile-body">
+            <div class="profile-head">
+              <div class="avatar big">M</div>
+              <button class="outline" id="editProfile">Edit Profile</button>
+            </div>
+            <h2>Monika</h2>
+            <div class="muted">@monika_d</div>
+            <p>Small thoughts · Big dreams · ♥</p>
+            <div class="muted">▣ Joined August 2025</div>
+            <div class="stats"><b>12</b> Posts &nbsp;&nbsp; <b>28</b> Following &nbsp;&nbsp; <b>45</b> Followers</div>
+            <div class="tabs"><span class="selected">Posts</span><span>Replies</span><span>Media</span><span>Likes</span></div>
 
-        <!-- Home Page -->
-        <section id="homePage">
+            <div class="composer">
+              <div class="avatar">M</div>
+              <input id="postInput" placeholder="What's on your mind?">
+              <div class="compose-bottom"><span>▧ &nbsp;▣ &nbsp;☺</span><button id="postNow">Post</button></div>
+            </div>
 
-            <h2>People to Follow</h2>
+            <div id="feed"></div>
+          </div>
+        </div>
+      </div>
 
-            <div id="userList"></div>
+      <aside class="rightbar">
+        <div class="side-card">
+          <h3>Profile Overview</h3>
+          <div class="overview"><div><b>12</b><small>Posts</small></div><div><b>28</b><small>Following</small></div><div><b>45</b><small>Followers</small></div></div>
+        </div>
 
-        </section>
+        <div class="side-card">
+          <div class="side-title"><h3>Followers (45)</h3><span>View all</span></div>
+          <div id="followers"></div>
+        </div>
 
+        <div class="side-card">
+          <div class="side-title"><h3>Following (28)</h3><span>View all</span></div>
+          <div id="following"></div>
+        </div>
 
-        <!-- Profile Page -->
-        <section id="profilePage">
-
-            <button onclick="goHome()" class="backBtn">
-                ← Back
-            </button>
-
-            <div id="profileDetails"></div>
-
-            <h2>Posts</h2>
-
-            <div id="postList"></div>
-
-        </section>
-
-    </main>
-
-    <script src="script.js"></script>
-
+        <div class="quote">❧<br><b>Good things take time.</b><small>Keep posting, keep growing!</small><br>♥</div>
+      </aside>
+    </section>
+  </main>
+</div>
+<script src="script.js"></script>
 </body>
 </html>
