@@ -1,196 +1,476 @@
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
 }
 
 body {
-    background: #f2f4f7;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #fafafa;
     color: #222;
 }
 
-header {
-    background: #1d9bf0;
-    color: white;
-    text-align: center;
-    padding: 25px;
-}
-
-header h1 {
-    margin-bottom: 5px;
-}
-
-main {
-    width: 90%;
-    max-width: 700px;
-    margin: 30px auto;
-}
-
-h2 {
-    margin-bottom: 20px;
-}
-
-
-/* User Card */
-
-.user-card {
-    background: white;
-    padding: 20px;
-    margin-bottom: 15px;
-    border-radius: 12px;
+.app {
     display: flex;
-    align-items: center;
-    gap: 15px;
-    box-shadow: 0 2px 8px #ccc;
+    min-height: 100vh;
 }
 
-.profile-img {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: #1d9bf0;
-    color: white;
+
+/* SIDEBAR */
+
+.sidebar {
+    width: 220px;
+    border-right: 1px solid #ddd;
+    padding: 24px 18px;
+    background: #f8f8f8;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+}
+
+.brand {
+    font-size: 21px;
+    font-weight: 700;
+    margin: 4px 10px 35px;
+}
+
+nav {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    font-weight: bold;
+    flex-direction: column;
+    gap: 6px;
 }
 
-.user-info {
+.nav {
+    border: 0;
+    background: transparent;
+    text-align: left;
+    padding: 13px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #555;
+    cursor: pointer;
+}
+
+.nav.active,
+.nav:hover {
+    background: #eee;
+    color: #111;
+}
+
+.nav span {
+    margin-left: 12px;
+}
+
+.post-btn {
+    width: 100%;
+    border: 0;
+    background: #666;
+    color: #fff;
+    border-radius: 24px;
+    padding: 12px;
+    font-weight: 600;
+    margin-top: 22px;
+    cursor: pointer;
+}
+
+
+/* MAIN */
+
+.main {
     flex: 1;
 }
 
-.user-info h3 {
-    margin-bottom: 5px;
+.topbar {
+    height: 72px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px;
+    background: #fff;
 }
 
-.stats {
+.search {
+    width: 330px;
+    background: #f0f0f0;
+    border-radius: 22px;
+    padding: 10px 16px;
+    color: #777;
+}
+
+.search input {
+    border: 0;
+    outline: 0;
+    background: transparent;
+    width: 90%;
+    font-size: 13px;
+}
+
+.top-actions {
+    display: flex;
+    gap: 18px;
+    align-items: center;
     color: #666;
-    font-size: 14px;
-    margin-top: 7px;
-}
-
-.viewBtn {
-    border: none;
-    background: #1d9bf0;
-    color: white;
-    padding: 9px 15px;
-    border-radius: 20px;
-    cursor: pointer;
-}
-
-.viewBtn:hover {
-    background: #0d8de0;
 }
 
 
-/* Profile */
+/* AVATAR */
 
-#profilePage {
-    display: none;
-}
-
-.profile-box {
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    text-align: center;
-    margin-bottom: 25px;
-    box-shadow: 0 2px 8px #ccc;
-}
-
-.big-profile-img {
-    width: 90px;
-    height: 90px;
+.avatar {
+    width: 31px;
+    height: 31px;
     border-radius: 50%;
-    background: #1d9bf0;
-    color: white;
+    background: #777;
+    color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-weight: 600;
+}
+
+.avatar.small {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+}
+
+.avatar.big {
+    width: 62px;
+    height: 62px;
+    font-size: 28px;
+    border: 4px solid #fff;
+    box-shadow: 0 1px 3px #aaa;
+}
+
+
+/* CONTENT */
+
+.content {
+    max-width: 1180px;
     margin: auto;
-    font-size: 35px;
-    font-weight: bold;
+    display: grid;
+    grid-template-columns: minmax(560px, 760px) 290px;
+    gap: 18px;
+    padding: 18px;
 }
 
-.profile-box h2 {
-    margin: 12px 0 5px;
+
+/* PROFILE */
+
+.profile-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    overflow: hidden;
 }
 
-.bio {
-    color: #666;
-    margin-bottom: 20px;
+.cover {
+    height: 175px;
+    background: linear-gradient(
+        125deg,
+        #707070,
+        #bdbdbd
+    );
+    position: relative;
+    color: #fff;
 }
 
-.profile-stats {
+.back {
+    position: absolute;
+    left: 18px;
+    top: 14px;
+    font-size: 22px;
+}
+
+.cover-text {
+    position: absolute;
+    right: 38px;
+    top: 28px;
+    font-family: cursive;
+    font-size: 17px;
+    line-height: 1.05;
+    transform: rotate(-8deg);
+}
+
+.profile-body {
+    padding: 0 22px 20px;
+}
+
+.profile-head {
     display: flex;
-    justify-content: space-around;
-    margin: 20px 0;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -31px;
 }
 
-.profile-stats div {
-    font-weight: bold;
-}
-
-.followBtn {
-    border: none;
-    background: #222;
-    color: white;
-    padding: 10px 25px;
-    border-radius: 20px;
+.outline {
+    background: #fff;
+    border: 1px solid #bbb;
+    border-radius: 18px;
+    padding: 9px 16px;
     cursor: pointer;
 }
 
-.backBtn {
-    border: none;
-    background: white;
-    padding: 10px 15px;
+.profile-body h2 {
+    margin: 8px 0 2px;
+    font-size: 21px;
+}
+
+.muted {
+    color: #777;
+    font-size: 12px;
+}
+
+.profile-body p {
+    font-size: 13px;
+    margin: 8px 0;
+}
+
+.stats {
+    font-size: 12px;
+    color: #777;
+    margin: 15px 0;
+}
+
+.stats b {
+    color: #222;
+}
+
+
+/* TABS */
+
+.tabs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid #ddd;
+    margin: 0 -22px;
+    padding: 0 22px;
+}
+
+.tabs span {
+    text-align: center;
+    padding: 13px 0;
+    font-size: 12px;
+    color: #777;
+}
+
+.tabs .selected {
+    color: #222;
+    border-bottom: 2px solid #555;
+    font-weight: 600;
+}
+
+
+/* COMPOSER */
+
+.composer {
+    border: 1px solid #e1e1e1;
     border-radius: 8px;
+    padding: 12px;
+    margin: 14px 0;
+}
+
+.composer > input {
+    border: 0;
+    outline: 0;
+    margin-left: 10px;
+    width: calc(100% - 50px);
+    font-size: 13px;
+}
+
+.compose-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    color: #777;
+}
+
+.compose-bottom button {
+    background: #666;
+    color: #fff;
+    border: 0;
+    border-radius: 17px;
+    padding: 8px 18px;
     cursor: pointer;
-    margin-bottom: 20px;
 }
 
 
-/* Posts */
+/* POSTS */
 
-.post {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    margin-bottom: 15px;
-    box-shadow: 0 2px 8px #ccc;
+.tweet {
+    border-top: 1px solid #e4e4e4;
+    padding: 15px 2px;
+    display: grid;
+    grid-template-columns: 34px 1fr 20px;
+    gap: 10px;
 }
 
-.post h3 {
-    margin-bottom: 8px;
+.tweet h4 {
+    margin: 0;
+    font-size: 12px;
 }
 
-.post p {
-    line-height: 1.5;
+.tweet h4 span {
+    font-weight: normal;
+    color: #888;
+}
+
+.tweet p {
+    font-size: 12px;
+    margin: 6px 0;
     color: #444;
 }
 
-.likeBtn {
-    border: none;
-    background: none;
-    cursor: pointer;
-    margin-top: 15px;
-    font-size: 15px;
+.actions {
+    display: flex;
+    gap: 28px;
+    color: #777;
+    font-size: 11px;
 }
 
-@media (max-width: 500px) {
+.action {
+    cursor: pointer;
+}
 
-    .user-card {
-        flex-wrap: wrap;
+
+/* RIGHT BAR */
+
+.rightbar {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.side-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    padding: 15px;
+}
+
+.side-card h3 {
+    font-size: 13px;
+    margin: 0 0 13px;
+}
+
+.overview {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: center;
+}
+
+.overview div {
+    border-right: 1px solid #eee;
+}
+
+.overview div:last-child {
+    border: 0;
+}
+
+.overview b {
+    display: block;
+    font-size: 16px;
+}
+
+.overview small {
+    font-size: 10px;
+    color: #777;
+}
+
+.side-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.side-title span {
+    font-size: 10px;
+    color: #888;
+}
+
+.person {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 12px 0;
+}
+
+.person-info {
+    flex: 1;
+}
+
+.person-info b {
+    display: block;
+    font-size: 11px;
+}
+
+.person-info small {
+    font-size: 9px;
+    color: #888;
+}
+
+.follow {
+    border: 1px solid #bbb;
+    background: #fff;
+    border-radius: 13px;
+    padding: 5px 11px;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.follow.following {
+    background: #eee;
+}
+
+.quote {
+    text-align: center;
+    color: #777;
+    font-size: 18px;
+    padding: 18px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+}
+
+.quote b {
+    display: block;
+    font-size: 12px;
+    margin-top: 7px;
+}
+
+.quote small {
+    display: block;
+    font-size: 9px;
+    margin: 5px;
+}
+
+
+/* RESPONSIVE */
+
+@media(max-width:900px) {
+
+    .sidebar {
+        width: 80px;
     }
 
-    .viewBtn {
-        width: 100%;
+    .brand span,
+    .nav span {
+        display: none;
     }
 
-    .profile-stats {
-        font-size: 14px;
+    .content {
+        grid-template-columns: 1fr;
+    }
+
+    .rightbar {
+        display: none;
+    }
+
+    .sidebar {
+        padding: 20px 10px;
+    }
+
+    .post-btn {
+        font-size: 0;
     }
 }
