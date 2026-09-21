@@ -1,318 +1,179 @@
-const posts = [
-    {
-        text: "Small steps every day lead to big dreams. 🌱",
-        tag: "#motivation #life",
-        likes: 16,
-        comments: 3,
-        time: "2h"
-    },
-    {
-        text: "The sky looks so beautiful today... ☁️",
-        tag: "#nature #goodvibes",
-        likes: 12,
-        comments: 2,
-        time: "5h"
-    },
-    {
-        text: "Coding is not just about writing code, it's about solving real world problems. 💻",
-        tag: "#developer #learning",
-        likes: 25,
-        comments: 4,
-        time: "1d"
-    },
-    {
-        text: "Grateful for the little things. ❤️",
-        tag: "#life #happiness",
-        likes: 18,
-        comments: 1,
-        time: "2d"
+/* ============ MicroBlog — interactions ============ */
+document.addEventListener("DOMContentLoaded", function () {
+
+  const LIMIT = 280;
+  const textarea = document.getElementById("composeText");
+  const postBtn  = document.getElementById("postBtn");
+  const counter  = document.getElementById("counter");
+  const postList = document.getElementById("postList");
+  const toastBox = document.getElementById("toast");
+
+  /* ---------- toast ---------- */
+  function toast(msg) {
+    toastBox.textContent = msg;
+    toastBox.classList.add("show");
+    clearTimeout(toast._t);
+    toast._t = setTimeout(() => toastBox.classList.remove("show"), 2000);
+  }
+
+  /* ---------- composer ---------- */
+  function autoGrow() {
+    textarea.style.height = "auto";
+    textarea.style.height = textarea.scrollHeight + "px";
+  }
+
+  textarea.addEventListener("input", function () {
+    const left = LIMIT - textarea.value.length;
+    counter.textContent = left;
+    counter.classList.toggle("warn", left < 20);
+    postBtn.disabled = textarea.value.trim() === "" || left < 0;
+    autoGrow();
+  });
+
+  textarea.addEventListener("keydown", function (e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === "Enter" && !postBtn.disabled) {
+      publish();
     }
-];
+  });
 
+  postBtn.addEventListener("click", publish);
 
-function displayPosts() {
+  document.getElementById("jumpCompose").addEventListener("click", function () {
+    textarea.focus();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 
-    const container =
-        document.getElementById("postContainer");
+  /* ---------- create a new post ---------- */
+  function publish() {
+    const raw = textarea.value.trim();
+    if (!raw) return;
 
-    container.innerHTML = posts.map(
-        (post, index) => `
+    // turn #words into coloured tags (escaped first)
+    const safe = raw
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/#([\w]+)/g, '<span class="tag">#$1</span>');
 
-        <div class="post">
+    const article = document.createElement("article");
+    article.className = "post";
+    article.innerHTML =
+      '<div class="avatar avatar-md grad-1">M</div>' +
+      '<div class="post-main">' +
+        '<div class="post-head"><b>Monika</b>' +
+        '<span class="muted">@monika_d · now</span>' +
+        '<button class="more">···</button></div>' +
+        '<p class="post-text">' + safe + "</p>" +
+        '<div class="actions">' +
+          '<button class="act reply">💬 <span>0</span></button>' +
+          '<button class="act repost">🔁 <span>0</span></button>' +
+          '<button class="act like">🤍 <span>0</span></button>' +
+          '<button class="act save">🔖</button>' +
+        "</div>" +
+      "</div>";
 
-            <div class="mini-avatar">
-                M
-            </div>
+    postList.prepend(article);
 
-            <div class="post-content">
+    textarea.value = "";
+    textarea.style.height = "auto";
+    counter.textContent = LIMIT;
+    counter.classList.remove("warn");
+    postBtn.disabled = true;
+    updateCount(+1);
+    toast("Posted");
+  }
 
-                <h4>
-                    Monika
-                    <span>
-                        @monika_d · ${post.time}
-                    </span>
-                </h4>
+  /* ---------- keep the post counters in sync ---------- */
+  function updateCount(delta) {
+    document.querySelectorAll(".p-stats b")[0].textContent =
+      parseInt(document.querySelectorAll(".p-stats b")[0].textContent, 10) + delta;
+    const ov = document.querySelector(".ov-box b");
+    ov.textContent = parseInt(ov.textContent, 10) + delta;
+  }
 
-                <p>
-                    ${post.text}
-                    <br>
-                    <span style="color:#6657e8">
-                        ${post.tag}
-                    </span>
-                </p>
+  /* ---------- like / repost / save (event delegation) ---------- */
+  document.addEventListener("click", function (e) {
+    const btn = e.target.closest(".act");
+    if (!btn) return;
 
-                <div class="post-actions">
+    const num = btn.querySelector("span");
 
-                    <span onclick="commentPost()">
-                        💬 ${post.comments}
-                    </span>
+    if (btn.classList.contains("like")) {
+      const on = btn.classList.toggle("on");
+      btn.firstChild.textContent = on ? "❤️ " : "🤍 ";
+      num.textContent = parseInt(num.textContent, 10) + (on ? 1 : -1);
+    } else if (btn.classList.contains("repost")) {
+      const on = btn.classList.toggle("on");
+      num.textContent = parseInt(num.textContent, 10) + (on ? 1 : -1);
+      toast(on ? "Reposted" : "Repost removed");
+    } else if (btn.classList.contains("save")) {
+      const on = btn.classList.toggle("on");
+      toast(on ? "Saved to your bookmarks" : "Removed from bookmarks");
+    } else if (btn.classList.contains("reply")) {
+      textarea.focus();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  });
 
-                    <span onclick="sharePost()">
-                        🔄 Share
-                    </span>
+  /* ---------- tabs ---------- */
+  const tabs = document.querySelectorAll(".tab");
+  const empty = document.getElementById("emptyState");
 
-                    <span onclick="likePost(${index}, this)">
-                        ❤️ ${post.likes}
-                    </span>
+  tabs.forEach(function (tab) {
+    tab.addEventListener("click", function () {
+      tabs.forEach(t => t.classList.remove("active"));
+      tab.classList.add("active");
 
-                    <span onclick="savePost()">
-                        🔖
-                    </span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    `
-    ).join("");
-}
-
-
-function likePost(index, element) {
-
-    posts[index].likes++;
-
-    element.innerHTML =
-        `❤️ ${posts[index].likes}`;
-}
-
-
-function commentPost() {
-
-    alert("Comment section opened!");
-
-}
-
-
-function sharePost() {
-
-    alert("Post link copied!");
-
-}
-
-
-function savePost() {
-
-    alert("Post saved successfully!");
-
-}
-
-
-/* NAVIGATION */
-
-const navButtons =
-    document.querySelectorAll(".nav-btn");
-
-const pages =
-    document.querySelectorAll(".page");
-
-
-navButtons.forEach(button => {
-
-    button.addEventListener("click", () => {
-
-        const pageName =
-            button.dataset.page;
-
-        navButtons.forEach(btn =>
-            btn.classList.remove("active")
-        );
-
-        button.classList.add("active");
-
-        pages.forEach(page =>
-            page.classList.remove("active-page")
-        );
-
-        document
-            .getElementById(pageName)
-            .classList.add("active-page");
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-
+      const isPosts = tab.dataset.tab === "posts";
+      postList.hidden = !isPosts;
+      empty.hidden = isPosts;
+      empty.textContent = "No " + tab.textContent.toLowerCase() + " to show yet.";
     });
+  });
+
+  /* ---------- follow buttons ---------- */
+  document.querySelectorAll(".btn-follow").forEach(function (btn) {
+    const name = btn.parentElement.querySelector("b").textContent;
+
+    btn.addEventListener("click", function () {
+      const nowFollowing = !btn.classList.contains("following");
+      btn.classList.toggle("following", nowFollowing);
+      btn.textContent = nowFollowing ? "Following" : "Follow";
+      toast(nowFollowing ? "Following " + name : "Unfollowed " + name);
+    });
+
+    btn.addEventListener("mouseenter", function () {
+      if (btn.classList.contains("following")) btn.textContent = "Unfollow";
+    });
+    btn.addEventListener("mouseleave", function () {
+      if (btn.classList.contains("following")) btn.textContent = "Following";
+    });
+  });
+
+  /* ---------- nav highlight ---------- */
+  document.querySelectorAll(".nav-item").forEach(function (item) {
+    item.addEventListener("click", function (e) {
+      e.preventDefault();
+      document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
+      item.classList.add("active");
+    });
+  });
+
+  /* ---------- search filter ---------- */
+  document.getElementById("searchBox").addEventListener("input", function (e) {
+    const q = e.target.value.toLowerCase().trim();
+    document.querySelectorAll(".post").forEach(function (p) {
+      p.style.display = p.textContent.toLowerCase().includes(q) ? "" : "none";
+    });
+  });
+
+  /* ---------- edit profile ---------- */
+  document.getElementById("editProfile").addEventListener("click", function () {
+    const name = prompt("Display name", document.querySelector(".p-name").textContent);
+    if (name && name.trim()) {
+      document.querySelector(".p-name").textContent = name.trim();
+      toast("Profile updated");
+    }
+  });
 
 });
-
-
-/* POST */
-
-document
-    .getElementById("postBtn")
-    .addEventListener("click", createPost);
-
-
-document
-    .getElementById("postSideBtn")
-    .addEventListener("click", () => {
-
-        document
-            .getElementById("postInput")
-            .focus();
-
-    });
-
-
-function createPost() {
-
-    const input =
-        document.getElementById("postInput");
-
-    const value =
-        input.value.trim();
-
-    if (value === "") {
-
-        alert("Please write something first.");
-
-        return;
-    }
-
-    posts.unshift({
-        text: value,
-        tag: "#newpost",
-        likes: 0,
-        comments: 0,
-        time: "now"
-    });
-
-    input.value = "";
-
-    displayPosts();
-
-}
-
-
-/* EDIT PROFILE */
-
-document
-    .getElementById("editProfile")
-    .addEventListener("click", editProfile);
-
-document
-    .getElementById("profileEditButton")
-    .addEventListener("click", editProfile);
-
-
-function editProfile() {
-
-    const name =
-        prompt("Enter your name:", "Monika");
-
-    if (name) {
-
-        document.querySelectorAll(
-            ".profile-content h2"
-        )[0].textContent = name;
-
-        alert("Profile updated!");
-
-    }
-
-}
-
-
-/* FOLLOWERS */
-
-const followers = [
-    ["Deepa", "D"],
-    ["Arun", "A"],
-    ["Sanjay", "S"],
-    ["Priya", "P"],
-    ["Kavi", "K"]
-];
-
-
-const following = [
-    ["TechVibes", "T"],
-    ["NatureClicks", "N"],
-    ["BookLover", "B"],
-    ["CodeWithMe", "C"],
-    ["MusicSoul", "M"]
-];
-
-
-function displayPeople(data, elementId) {
-
-    document.getElementById(elementId).innerHTML =
-        data.map(person => `
-
-        <div class="person">
-
-            <div class="mini-avatar">
-                ${person[1]}
-            </div>
-
-            <div class="person-info">
-
-                <b>${person[0]}</b>
-
-                <small>
-                    @${person[0].toLowerCase()}
-                </small>
-
-            </div>
-
-            <button
-                class="follow"
-                onclick="followUser(this)"
-            >
-                Follow
-            </button>
-
-        </div>
-
-    `).join("");
-
-}
-
-
-function followUser(button) {
-
-    if (button.textContent === "Follow") {
-
-        button.textContent = "Following";
-
-        button.classList.add("following");
-
-    } else {
-
-        button.textContent = "Follow";
-
-        button.classList.remove("following");
-
-    }
-
-}
-
-
-displayPeople(followers, "followers");
-
-displayPeople(following, "following");
-
-displayPosts();
