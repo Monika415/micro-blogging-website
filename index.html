@@ -7,868 +7,681 @@
     <title>MicroBlog</title>
 
     <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
 </head>
 
 <body>
 
-<!-- ================= HEADER ================= -->
-
-<header class="header">
-
-    <div class="logo">
-        <span>🦩</span>
-        <h2>MicroBlog</h2>
-    </div>
-
-    <div class="search">
-        🔍
-        <input
-            type="text"
-            id="searchInput"
-            placeholder="Search posts, users..."
-        >
-    </div>
-
-    <div class="header-right">
-
-        <button id="notificationBtn">🔔</button>
-
-        <button id="myProfileBtn" class="my-profile">
-            <span>M</span>
-            Monika
-        </button>
-
-    </div>
-
-</header>
-
-
-<!-- ================= MAIN LAYOUT ================= -->
-
-<div class="layout">
-
-
-    <!-- ================= SIDEBAR ================= -->
-
-    <aside class="sidebar">
-
-        <button class="menu active" data-page="home">
-            🏠
-            <span>Home</span>
-        </button>
-
-        <button class="menu" data-page="explore">
-            🧭
-            <span>Explore</span>
-        </button>
-
-        <button class="menu" data-page="messages">
-            💬
-            <span>Messages</span>
-        </button>
-
-        <button class="menu" data-page="saved">
-            🔖
-            <span>Saved</span>
-        </button>
-
-        <button class="menu" data-page="profile">
-            👤
-            <span>Profile</span>
-        </button>
-
-        <button id="createPostSide" class="post-btn">
-            ✎ Post
-        </button>
-
-    </aside>
-
-
-    <!-- ================= CENTER ================= -->
-
-    <main class="content">
-
-
-        <!-- ================= HOME ================= -->
-
-        <section id="homePage" class="page">
-
-            <div class="page-title">
-                <h1>Home</h1>
-                <p>See what's happening around you.</p>
-            </div>
-
-
-            <!-- CREATE POST -->
-
-            <div class="create-post">
-
-                <div class="avatar purple">
-                    M
-                </div>
-
-                <div class="create-area">
-
-                    <textarea
-                        id="postInput"
-                        maxlength="280"
-                        placeholder="What's on your mind?"
-                    ></textarea>
-
-                    <div class="create-bottom">
-
-                        <div class="icons">
-                            🖼️
-                            🎬
-                            😊
-                        </div>
-
-                        <div>
-
-                            <span id="characterCount">
-                                280
-                            </span>
-
-                            <button
-                                id="postButton"
-                                class="publish"
-                            >
-                                Post
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- ================= POSTS ================= -->
-
-            <div id="postsContainer">
-
-
-                <!-- POST 1 -->
-
-                <article class="post">
-
-                    <div
-                        class="avatar orange profile-link"
-                        data-user="Deepa"
-                    >
-                        D
-                    </div>
-
-                    <div class="post-content">
-
-                        <div class="post-header">
-
-                            <div
-                                class="user-info profile-link"
-                                data-user="Deepa"
-                            >
-
-                                <strong>Deepa</strong>
-
-                                <span>
-                                    @deepa_07 · 2h
-                                </span>
-
-                            </div>
-
-                            <button class="more">
-                                •••
-                            </button>
-
-                        </div>
-
-                        <p class="post-text">
-                            Today was a beautiful day!
-                            Sometimes the smallest moments
-                            become the best memories. 🌸
-                        </p>
-
-                        <div class="post-actions">
-
-                            <button class="comment">
-                                💬 <span>12</span>
-                            </button>
-
-                            <button class="share">
-                                🔁 <span>5</span>
-                            </button>
-
-                            <button class="like">
-                                ♡ <span>45</span>
-                            </button>
-
-                            <button class="save">
-                                🔖
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- POST 2 -->
-
-                <article class="post">
-
-                    <div
-                        class="avatar blue profile-link"
-                        data-user="Arun"
-                    >
-                        A
-                    </div>
-
-                    <div class="post-content">
-
-                        <div class="post-header">
-
-                            <div
-                                class="user-info profile-link"
-                                data-user="Arun"
-                            >
-
-                                <strong>Arun</strong>
-
-                                <span>
-                                    @arun_talks · 4h
-                                </span>
-
-                            </div>
-
-                            <button class="more">
-                                •••
-                            </button>
-
-                        </div>
-
-                        <p class="post-text">
-                            Learning something new every day.
-                            Currently working on a new web
-                            development project. 💻🚀
-                        </p>
-
-                        <div class="post-actions">
-
-                            <button class="comment">
-                                💬 <span>8</span>
-                            </button>
-
-                            <button class="share">
-                                🔁 <span>3</span>
-                            </button>
-
-                            <button class="like">
-                                ♡ <span>67</span>
-                            </button>
-
-                            <button class="save">
-                                🔖
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- POST 3 -->
-
-                <article class="post">
-
-                    <div
-                        class="avatar green profile-link"
-                        data-user="Sanjay"
-                    >
-                        S
-                    </div>
-
-                    <div class="post-content">
-
-                        <div class="post-header">
-
-                            <div
-                                class="user-info profile-link"
-                                data-user="Sanjay"
-                            >
-
-                                <strong>Sanjay</strong>
-
-                                <span>
-                                    @sanjay.dev · 6h
-                                </span>
-
-                            </div>
-
-                            <button class="more">
-                                •••
-                            </button>
-
-                        </div>
-
-                        <p class="post-text">
-                            Just finished building my first
-                            JavaScript project! The journey
-                            is challenging but exciting. 🔥
-                        </p>
-
-                        <div class="post-actions">
-
-                            <button class="comment">
-                                💬 <span>15</span>
-                            </button>
-
-                            <button class="share">
-                                🔁 <span>7</span>
-                            </button>
-
-                            <button class="like">
-                                ♡ <span>91</span>
-                            </button>
-
-                            <button class="save">
-                                🔖
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- POST 4 -->
-
-                <article class="post">
-
-                    <div
-                        class="avatar pink profile-link"
-                        data-user="Priya"
-                    >
-                        P
-                    </div>
-
-                    <div class="post-content">
-
-                        <div class="post-header">
-
-                            <div
-                                class="user-info profile-link"
-                                data-user="Priya"
-                            >
-
-                                <strong>Priya</strong>
-
-                                <span>
-                                    @priya_19 · 8h
-                                </span>
-
-                            </div>
-
-                            <button class="more">
-                                •••
-                            </button>
-
-                        </div>
-
-                        <p class="post-text">
-                            Don't compare your beginning
-                            with someone else's middle.
-                            Keep going. 🌷✨
-                        </p>
-
-                        <div class="post-actions">
-
-                            <button class="comment">
-                                💬 <span>20</span>
-                            </button>
-
-                            <button class="share">
-                                🔁 <span>11</span>
-                            </button>
-
-                            <button class="like">
-                                ♡ <span>105</span>
-                            </button>
-
-                            <button class="save">
-                                🔖
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- POST 5 -->
-
-                <article class="post">
-
-                    <div
-                        class="avatar purple profile-link"
-                        data-user="Kavi"
-                    >
-                        K
-                    </div>
-
-                    <div class="post-content">
-
-                        <div class="post-header">
-
-                            <div
-                                class="user-info profile-link"
-                                data-user="Kavi"
-                            >
-
-                                <strong>Kavi</strong>
-
-                                <span>
-                                    @kavi_quotes · 10h
-                                </span>
-
-                            </div>
-
-                            <button class="more">
-                                •••
-                            </button>
-
-                        </div>
-
-                        <p class="post-text">
-                            Books have a special way of
-                            taking us to places we have
-                            never been. 📚☕
-                        </p>
-
-                        <div class="post-actions">
-
-                            <button class="comment">
-                                💬 <span>9</span>
-                            </button>
-
-                            <button class="share">
-                                🔁 <span>4</span>
-                            </button>
-
-                            <button class="like">
-                                ♡ <span>76</span>
-                            </button>
-
-                            <button class="save">
-                                🔖
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= EXPLORE ================= -->
-
-        <section id="explorePage" class="page hidden">
-
-            <div class="page-title">
-
-                <h1>Explore</h1>
-
-                <p>
-                    Discover new people.
-                </p>
-
-            </div>
-
-
-            <div class="people-grid">
-
-                <div
-                    class="explore-user profile-link"
-                    data-user="Deepa"
-                >
-
-                    <div class="avatar orange">
-                        D
-                    </div>
-
-                    <h3>Deepa</h3>
-
-                    <p>@deepa_07</p>
-
-                </div>
-
-
-                <div
-                    class="explore-user profile-link"
-                    data-user="Arun"
-                >
-
-                    <div class="avatar blue">
-                        A
-                    </div>
-
-                    <h3>Arun</h3>
-
-                    <p>@arun_talks</p>
-
-                </div>
-
-
-                <div
-                    class="explore-user profile-link"
-                    data-user="Sanjay"
-                >
-
-                    <div class="avatar green">
-                        S
-                    </div>
-
-                    <h3>Sanjay</h3>
-
-                    <p>@sanjay.dev</p>
-
-                </div>
-
-
-                <div
-                    class="explore-user profile-link"
-                    data-user="Priya"
-                >
-
-                    <div class="avatar pink">
-                        P
-                    </div>
-
-                    <h3>Priya</h3>
-
-                    <p>@priya_19</p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= MESSAGES ================= -->
-
-        <section id="messagesPage" class="page hidden">
-
-            <div class="page-title">
-
-                <h1>Messages</h1>
-
-                <p>Your conversations.</p>
-
-            </div>
-
-            <div class="message-box">
-
-                <div class="avatar orange">
-                    D
-                </div>
-
-                <div>
-
-                    <strong>Deepa</strong>
-
-                    <p>
-                        Hey! How are you?
-                    </p>
-
-                </div>
-
-            </div>
-
-            <div class="message-box">
-
-                <div class="avatar blue">
-                    A
-                </div>
-
-                <div>
-
-                    <strong>Arun</strong>
-
-                    <p>
-                        Check my latest post!
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= SAVED ================= -->
-
-        <section id="savedPage" class="page hidden">
-
-            <div class="page-title">
-
-                <h1>Saved</h1>
-
-                <p>
-                    Your saved posts will appear here.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= MY PROFILE ================= -->
-
-        <section id="myProfilePage" class="page hidden">
-
-            <div class="profile-page">
-
-                <div class="profile-cover"></div>
-
-                <div class="profile-page-body">
-
-                    <div class="large-avatar purple">
-                        M
-                    </div>
-
-                    <h1>Monika</h1>
-
-                    <p>@monika_d</p>
-
-                    <p>
-                        Small thoughts • Big dreams • 🦩
-                    </p>
-
-                    <div class="profile-stats">
-
-                        <span>
-                            <b id="myPosts">
-                                12
-                            </b>
-                            Posts
-                        </span>
-
-                        <span>
-                            <b>28</b>
-                            Following
-                        </span>
-
-                        <span>
-                            <b>45</b>
-                            Followers
-                        </span>
-
-                    </div>
-
-                    <button class="edit-profile">
-                        Edit Profile
-                    </button>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= OTHER USER PROFILE ================= -->
-
-        <section id="userProfilePage" class="page hidden">
-
-            <button id="backButton" class="back-button">
-                ← Back
+    <!-- ================= HEADER ================= -->
+
+    <header class="header">
+
+        <div class="logo">
+            🦩 <span>MicroBlog</span>
+        </div>
+
+        <div class="search-box">
+            🔍
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search posts, users..."
+            >
+        </div>
+
+        <div class="header-right">
+
+            <button id="notificationBtn">
+                🔔
             </button>
 
-
-            <div class="profile-page">
-
-                <div class="profile-cover user-cover"></div>
-
-                <div class="profile-page-body">
-
-                    <div
-                        id="userAvatar"
-                        class="large-avatar"
-                    >
-                        D
-                    </div>
-
-                    <h1 id="userName">
-                        Deepa
-                    </h1>
-
-                    <p id="userUsername">
-                        @deepa_07
-                    </p>
-
-                    <p id="userBio">
-                        Exploring life one day at a time.
-                    </p>
-
-
-                    <div class="profile-stats">
-
-                        <span>
-
-                            <b id="userPosts">
-                                34
-                            </b>
-
-                            Posts
-
-                        </span>
-
-
-                        <span>
-
-                            <b id="userFollowing">
-                                18
-                            </b>
-
-                            Following
-
-                        </span>
-
-
-                        <span>
-
-                            <b id="userFollowers">
-                                120
-                            </b>
-
-                            Followers
-
-                        </span>
-
-                    </div>
-
-
-                    <button
-                        id="followUserButton"
-                        class="follow-user"
-                    >
-                        Follow
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <div class="user-posts-title">
-                <h2>Posts</h2>
-            </div>
-
-
-            <div id="userPostsContainer">
-
-                <!-- Profile posts are inserted by JS -->
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- ================= RIGHT SIDEBAR ================= -->
-
-    <aside class="right-sidebar">
-
-
-        <!-- PROFILE OVERVIEW -->
-
-        <div class="right-card">
-
-            <h2>
-                Profile Overview
-            </h2>
-
-            <div class="overview">
-
-                <div>
-
-                    <b id="overviewPosts">
-                        12
-                    </b>
-
-                    <small>
-                        Posts
-                    </small>
-
-                </div>
-
-
-                <div>
-
-                    <b>
-                        28
-                    </b>
-
-                    <small>
-                        Following
-                    </small>
-
-                </div>
-
-
-                <div>
-
-                    <b>
-                        45
-                    </b>
-
-                    <small>
-                        Followers
-                    </small>
-
-                </div>
-
-            </div>
+            <button id="myProfileBtn" class="my-profile-btn">
+                <span class="top-avatar">M</span>
+                Monika
+            </button>
 
         </div>
 
-
-        <!-- FOLLOWERS -->
-
-        <div class="right-card">
-
-            <div class="right-heading">
-
-                <h2>
-                    Followers (45)
-                </h2>
-
-                <button>
-                    View all
-                </button>
-
-            </div>
+    </header>
 
 
-            <div class="person-list">
+    <!-- ================= MAIN ================= -->
+
+    <div class="main-layout">
 
 
-                <div
-                    class="person profile-link"
-                    data-user="Deepa"
-                >
+        <!-- ================= LEFT SIDEBAR ================= -->
+
+        <aside class="left-sidebar">
+
+            <button
+                class="nav-btn active"
+                data-page="home"
+            >
+                🏠
+                <span>Home</span>
+            </button>
+
+
+            <button
+                class="nav-btn"
+                data-page="explore"
+            >
+                🧭
+                <span>Explore</span>
+            </button>
+
+
+            <button
+                class="nav-btn"
+                data-page="messages"
+            >
+                💬
+                <span>Messages</span>
+            </button>
+
+
+            <button
+                class="nav-btn"
+                data-page="saved"
+            >
+                🔖
+                <span>Saved</span>
+            </button>
+
+
+            <button
+                class="nav-btn"
+                data-page="profile"
+            >
+                👤
+                <span>Profile</span>
+            </button>
+
+
+            <button
+                id="sidePostButton"
+                class="side-post-button"
+            >
+                ✎ Post
+            </button>
+
+        </aside>
+
+
+        <!-- ================= CENTER CONTENT ================= -->
+
+        <main class="center-content">
+
+
+            <!-- ================= HOME PAGE ================= -->
+
+            <section
+                id="homePage"
+                class="page"
+            >
+
+                <div class="page-heading">
+
+                    <h1>Home</h1>
+
+                    <p>
+                        See what's happening around you.
+                    </p>
+
+                </div>
+
+
+                <!-- CREATE POST -->
+
+                <div class="create-post-card">
+
+                    <div class="avatar purple">
+                        M
+                    </div>
+
+
+                    <div class="create-post-area">
+
+                        <textarea
+                            id="postInput"
+                            placeholder="What's on your mind?"
+                            maxlength="280"
+                        ></textarea>
+
+
+                        <div class="create-bottom">
+
+                            <div>
+                                🖼️ &nbsp;
+                                🎬 &nbsp;
+                                😊
+                            </div>
+
+
+                            <div class="post-controls">
+
+                                <span id="characterCount">
+                                    280
+                                </span>
+
+                                <button
+                                    id="postButton"
+                                    class="post-button"
+                                >
+                                    Post
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- POSTS -->
+
+                <div id="postsContainer">
+
+
+                    <!-- DEEPA POST -->
+
+                    <article class="post-card">
+
+                        <div
+                            class="avatar orange profile-click"
+                            data-user="Deepa"
+                        >
+                            D
+                        </div>
+
+
+                        <div class="post-main">
+
+                            <div class="post-top">
+
+                                <div
+                                    class="user-click profile-click"
+                                    data-user="Deepa"
+                                >
+
+                                    <strong>
+                                        Deepa
+                                    </strong>
+
+                                    <span>
+                                        @deepa_07 · 2h
+                                    </span>
+
+                                </div>
+
+                                <button class="more-button">
+                                    •••
+                                </button>
+
+                            </div>
+
+
+                            <p class="post-text">
+                                Today was a beautiful day!
+                                Sometimes the smallest moments
+                                become the best memories. 🌸
+                            </p>
+
+
+                            <div class="post-actions">
+
+                                <button class="comment-button">
+                                    💬 <span>12</span>
+                                </button>
+
+                                <button class="share-button">
+                                    🔁 <span>5</span>
+                                </button>
+
+                                <button class="like-button">
+                                    ♡ <span>45</span>
+                                </button>
+
+                                <button class="save-button">
+                                    🔖
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- ARUN POST -->
+
+                    <article class="post-card">
+
+                        <div
+                            class="avatar blue profile-click"
+                            data-user="Arun"
+                        >
+                            A
+                        </div>
+
+
+                        <div class="post-main">
+
+                            <div class="post-top">
+
+                                <div
+                                    class="user-click profile-click"
+                                    data-user="Arun"
+                                >
+
+                                    <strong>
+                                        Arun
+                                    </strong>
+
+                                    <span>
+                                        @arun_talks · 4h
+                                    </span>
+
+                                </div>
+
+                                <button class="more-button">
+                                    •••
+                                </button>
+
+                            </div>
+
+
+                            <p class="post-text">
+                                Learning something new every day.
+                                Currently working on a new web
+                                development project. 💻🚀
+                            </p>
+
+
+                            <div class="post-actions">
+
+                                <button class="comment-button">
+                                    💬 <span>8</span>
+                                </button>
+
+                                <button class="share-button">
+                                    🔁 <span>3</span>
+                                </button>
+
+                                <button class="like-button">
+                                    ♡ <span>67</span>
+                                </button>
+
+                                <button class="save-button">
+                                    🔖
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- SANJAY POST -->
+
+                    <article class="post-card">
+
+                        <div
+                            class="avatar green profile-click"
+                            data-user="Sanjay"
+                        >
+                            S
+                        </div>
+
+
+                        <div class="post-main">
+
+                            <div class="post-top">
+
+                                <div
+                                    class="user-click profile-click"
+                                    data-user="Sanjay"
+                                >
+
+                                    <strong>
+                                        Sanjay
+                                    </strong>
+
+                                    <span>
+                                        @sanjay.dev · 6h
+                                    </span>
+
+                                </div>
+
+                                <button class="more-button">
+                                    •••
+                                </button>
+
+                            </div>
+
+
+                            <p class="post-text">
+                                Just finished building my first
+                                JavaScript project! The journey
+                                is challenging but exciting. 🔥
+                            </p>
+
+
+                            <div class="post-actions">
+
+                                <button class="comment-button">
+                                    💬 <span>15</span>
+                                </button>
+
+                                <button class="share-button">
+                                    🔁 <span>7</span>
+                                </button>
+
+                                <button class="like-button">
+                                    ♡ <span>91</span>
+                                </button>
+
+                                <button class="save-button">
+                                    🔖
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- PRIYA POST -->
+
+                    <article class="post-card">
+
+                        <div
+                            class="avatar pink profile-click"
+                            data-user="Priya"
+                        >
+                            P
+                        </div>
+
+
+                        <div class="post-main">
+
+                            <div class="post-top">
+
+                                <div
+                                    class="user-click profile-click"
+                                    data-user="Priya"
+                                >
+
+                                    <strong>
+                                        Priya
+                                    </strong>
+
+                                    <span>
+                                        @priya_19 · 8h
+                                    </span>
+
+                                </div>
+
+                                <button class="more-button">
+                                    •••
+                                </button>
+
+                            </div>
+
+
+                            <p class="post-text">
+                                Don't compare your beginning
+                                with someone else's middle.
+                                Keep going. 🌷✨
+                            </p>
+
+
+                            <div class="post-actions">
+
+                                <button class="comment-button">
+                                    💬 <span>20</span>
+                                </button>
+
+                                <button class="share-button">
+                                    🔁 <span>11</span>
+                                </button>
+
+                                <button class="like-button">
+                                    ♡ <span>105</span>
+                                </button>
+
+                                <button class="save-button">
+                                    🔖
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- KAVI POST -->
+
+                    <article class="post-card">
+
+                        <div
+                            class="avatar purple profile-click"
+                            data-user="Kavi"
+                        >
+                            K
+                        </div>
+
+
+                        <div class="post-main">
+
+                            <div class="post-top">
+
+                                <div
+                                    class="user-click profile-click"
+                                    data-user="Kavi"
+                                >
+
+                                    <strong>
+                                        Kavi
+                                    </strong>
+
+                                    <span>
+                                        @kavi_quotes · 10h
+                                    </span>
+
+                                </div>
+
+                                <button class="more-button">
+                                    •••
+                                </button>
+
+                            </div>
+
+
+                            <p class="post-text">
+                                Books have a special way of
+                                taking us to places we have
+                                never been. 📚☕
+                            </p>
+
+
+                            <div class="post-actions">
+
+                                <button class="comment-button">
+                                    💬 <span>9</span>
+                                </button>
+
+                                <button class="share-button">
+                                    🔁 <span>4</span>
+                                </button>
+
+                                <button class="like-button">
+                                    ♡ <span>76</span>
+                                </button>
+
+                                <button class="save-button">
+                                    🔖
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= EXPLORE PAGE ================= -->
+
+            <section
+                id="explorePage"
+                class="page hidden"
+            >
+
+                <div class="page-heading">
+
+                    <h1>Explore</h1>
+
+                    <p>
+                        Discover people on MicroBlog.
+                    </p>
+
+                </div>
+
+
+                <div class="explore-grid">
+
+                    <div
+                        class="explore-card profile-click"
+                        data-user="Deepa"
+                    >
+
+                        <div class="avatar orange">
+                            D
+                        </div>
+
+                        <h2>Deepa</h2>
+
+                        <p>@deepa_07</p>
+
+                        <button>
+                            View Profile
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        class="explore-card profile-click"
+                        data-user="Arun"
+                    >
+
+                        <div class="avatar blue">
+                            A
+                        </div>
+
+                        <h2>Arun</h2>
+
+                        <p>@arun_talks</p>
+
+                        <button>
+                            View Profile
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        class="explore-card profile-click"
+                        data-user="Sanjay"
+                    >
+
+                        <div class="avatar green">
+                            S
+                        </div>
+
+                        <h2>Sanjay</h2>
+
+                        <p>@sanjay.dev</p>
+
+                        <button>
+                            View Profile
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        class="explore-card profile-click"
+                        data-user="Priya"
+                    >
+
+                        <div class="avatar pink">
+                            P
+                        </div>
+
+                        <h2>Priya</h2>
+
+                        <p>@priya_19</p>
+
+                        <button>
+                            View Profile
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        class="explore-card profile-click"
+                        data-user="Kavi"
+                    >
+
+                        <div class="avatar purple">
+                            K
+                        </div>
+
+                        <h2>Kavi</h2>
+
+                        <p>@kavi_quotes</p>
+
+                        <button>
+                            View Profile
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= MESSAGES ================= -->
+
+            <section
+                id="messagesPage"
+                class="page hidden"
+            >
+
+                <div class="page-heading">
+
+                    <h1>Messages</h1>
+
+                    <p>
+                        Your conversations.
+                    </p>
+
+                </div>
+
+
+                <div class="message-card">
 
                     <div class="avatar orange">
                         D
@@ -880,23 +693,16 @@
                             Deepa
                         </strong>
 
-                        <small>
-                            @deepa_07
-                        </small>
+                        <p>
+                            Hey! How are you?
+                        </p>
 
                     </div>
-
-                    <button class="follow">
-                        Following
-                    </button>
 
                 </div>
 
 
-                <div
-                    class="person profile-link"
-                    data-user="Arun"
-                >
+                <div class="message-card">
 
                     <div class="avatar blue">
                         A
@@ -908,114 +714,480 @@
                             Arun
                         </strong>
 
-                        <small>
-                            @arun_talks
-                        </small>
+                        <p>
+                            Check my latest post!
+                        </p>
 
                     </div>
 
-                    <button class="follow">
-                        Follow
-                    </button>
+                </div>
+
+            </section>
+
+
+            <!-- ================= SAVED ================= -->
+
+            <section
+                id="savedPage"
+                class="page hidden"
+            >
+
+                <div class="page-heading">
+
+                    <h1>Saved</h1>
+
+                    <p>
+                        Your saved posts appear here.
+                    </p>
 
                 </div>
 
 
-                <div
-                    class="person profile-link"
-                    data-user="Sanjay"
+                <div id="savedPostsContainer">
+
+                    <div class="empty-message">
+                        No saved posts yet.
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= MY PROFILE ================= -->
+
+            <section
+                id="myProfilePage"
+                class="page hidden"
+            >
+
+                <div class="profile-box">
+
+                    <div class="cover"></div>
+
+                    <div class="profile-info">
+
+                        <div class="large-avatar purple">
+                            M
+                        </div>
+
+                        <h1>
+                            Monika
+                        </h1>
+
+                        <p>
+                            @monika_d
+                        </p>
+
+                        <p class="bio">
+                            Small thoughts • Big dreams • 🦩
+                        </p>
+
+
+                        <div class="stats">
+
+                            <div>
+                                <strong id="myPostCount">
+                                    12
+                                </strong>
+
+                                <span>
+                                    Posts
+                                </span>
+                            </div>
+
+
+                            <div>
+                                <strong>
+                                    28
+                                </strong>
+
+                                <span>
+                                    Following
+                                </span>
+                            </div>
+
+
+                            <div>
+                                <strong>
+                                    45
+                                </strong>
+
+                                <span>
+                                    Followers
+                                </span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= USER PROFILE ================= -->
+
+            <section
+                id="userProfilePage"
+                class="page hidden"
+            >
+
+                <button
+                    id="backButton"
+                    class="back-button"
                 >
+                    ← Back to Home
+                </button>
 
-                    <div class="avatar green">
-                        S
+
+                <div class="profile-box">
+
+                    <div class="cover user-cover"></div>
+
+                    <div class="profile-info">
+
+                        <div
+                            id="userAvatar"
+                            class="large-avatar"
+                        >
+                            D
+                        </div>
+
+
+                        <h1 id="userName">
+                            Deepa
+                        </h1>
+
+
+                        <p id="userUsername">
+                            @deepa_07
+                        </p>
+
+
+                        <p
+                            id="userBio"
+                            class="bio"
+                        >
+                            Exploring life one day at a time.
+                        </p>
+
+
+                        <div class="stats">
+
+                            <div>
+                                <strong id="userPosts">
+                                    34
+                                </strong>
+
+                                <span>
+                                    Posts
+                                </span>
+                            </div>
+
+
+                            <div>
+                                <strong id="userFollowing">
+                                    18
+                                </strong>
+
+                                <span>
+                                    Following
+                                </span>
+                            </div>
+
+
+                            <div>
+                                <strong id="userFollowers">
+                                    120
+                                </strong>
+
+                                <span>
+                                    Followers
+                                </span>
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            id="followButton"
+                            class="follow-main"
+                        >
+                            Follow
+                        </button>
+
                     </div>
-
-                    <div>
-
-                        <strong>
-                            Sanjay
-                        </strong>
-
-                        <small>
-                            @sanjay.dev
-                        </small>
-
-                    </div>
-
-                    <button class="follow">
-                        Follow
-                    </button>
 
                 </div>
 
 
-                <div
-                    class="person profile-link"
-                    data-user="Priya"
-                >
+                <h2 class="profile-post-heading">
+                    Posts
+                </h2>
 
-                    <div class="avatar pink">
-                        P
+
+                <div id="userPostsContainer"></div>
+
+            </section>
+
+        </main>
+
+
+        <!-- ================= RIGHT SIDEBAR ================= -->
+
+        <aside class="right-sidebar">
+
+
+            <!-- PROFILE OVERVIEW -->
+
+            <div class="right-card">
+
+                <h2>
+                    Profile Overview
+                </h2>
+
+
+                <div class="overview">
+
+                    <div>
+
+                        <strong id="overviewPostCount">
+                            12
+                        </strong>
+
+                        <span>
+                            Posts
+                        </span>
+
                     </div>
+
 
                     <div>
 
                         <strong>
-                            Priya
+                            28
                         </strong>
 
-                        <small>
-                            @priya_19
-                        </small>
+                        <span>
+                            Following
+                        </span>
 
                     </div>
 
-                    <button class="follow">
-                        Follow
-                    </button>
-
-                </div>
-
-
-                <div
-                    class="person profile-link"
-                    data-user="Kavi"
-                >
-
-                    <div class="avatar purple">
-                        K
-                    </div>
 
                     <div>
 
                         <strong>
-                            Kavi
+                            45
                         </strong>
 
-                        <small>
-                            @kavi_quotes
-                        </small>
+                        <span>
+                            Followers
+                        </span>
 
                     </div>
-
-                    <button class="follow">
-                        Follow
-                    </button>
 
                 </div>
 
             </div>
 
-        </div>
 
-    </aside>
+            <!-- FOLLOWERS -->
 
-</div>
+            <div class="right-card">
+
+                <div class="right-title">
+
+                    <h2>
+                        Followers (45)
+                    </h2>
+
+                    <button>
+                        View all
+                    </button>
+
+                </div>
 
 
-<!-- TOAST -->
+                <div class="people-list">
 
-<div id="toast" class="toast"></div>
+
+                    <div
+                        class="person profile-click"
+                        data-user="Deepa"
+                    >
+
+                        <div class="avatar orange">
+                            D
+                        </div>
+
+                        <div class="person-name">
+
+                            <strong>
+                                Deepa
+                            </strong>
+
+                            <span>
+                                @deepa_07
+                            </span>
+
+                        </div>
+
+                        <button
+                            class="follow-small"
+                            type="button"
+                        >
+                            Following
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        class="person profile-click"
+                        data-user="Arun"
+                    >
+
+                        <div class="avatar blue">
+                            A
+                        </div>
+
+                        <div class="person-name">
+
+                            <strong>
+                                Arun
+                            </strong>
+
+                            <span>
+                                @arun_talks
+                            </span>
+
+                        </div>
+
+                        <button
+                            class="follow-small"
+                            type="button"
+                        >
+                            Follow
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        class="person profile-click"
+                        data-user="Sanjay"
+                    >
+
+                        <div class="avatar green">
+                            S
+                        </div>
+
+                        <div class="person-name">
+
+                            <strong>
+                                Sanjay
+                            </strong>
+
+                            <span>
+                                @sanjay.dev
+                            </span>
+
+                        </div>
+
+                        <button
+                            class="follow-small"
+                            type="button"
+                        >
+                            Follow
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        class="person profile-click"
+                        data-user="Priya"
+                    >
+
+                        <div class="avatar pink">
+                            P
+                        </div>
+
+                        <div class="person-name">
+
+                            <strong>
+                                Priya
+                            </strong>
+
+                            <span>
+                                @priya_19
+                            </span>
+
+                        </div>
+
+                        <button
+                            class="follow-small"
+                            type="button"
+                        >
+                            Follow
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        class="person profile-click"
+                        data-user="Kavi"
+                    >
+
+                        <div class="avatar purple">
+                            K
+                        </div>
+
+                        <div class="person-name">
+
+                            <strong>
+                                Kavi
+                            </strong>
+
+                            <span>
+                                @kavi_quotes
+                            </span>
+
+                        </div>
+
+                        <button
+                            class="follow-small"
+                            type="button"
+                        >
+                            Follow
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+    </div>
+
+
+    <!-- TOAST -->
+
+    <div
+        id="toast"
+        class="toast"
+    ></div>
+
+
+    <!-- IMPORTANT: JS IS LOADED HERE -->
+
+    <script src="script.js"></script>
 
 </body>
 </html>
