@@ -4,8 +4,9 @@
     box-sizing: border-box;
 }
 
+
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial, sans-serif;
     background: #eef4fb;
     color: #172033;
 }
@@ -14,50 +15,39 @@ body {
 /* ================= HEADER ================= */
 
 .header {
-    height: 78px;
-
+    height: 75px;
     background: white;
-
-    border-bottom: 1px solid #e4e9f1;
+    border-bottom: 1px solid #e1e7ef;
 
     display: flex;
     align-items: center;
 
-    padding: 0 35px;
+    padding: 0 30px;
 
     position: sticky;
     top: 0;
 
-    z-index: 1000;
+    z-index: 100;
 }
+
 
 .logo {
     width: 290px;
 
-    display: flex;
-    align-items: center;
+    font-size: 22px;
+    font-weight: bold;
 
-    gap: 10px;
-}
-
-.logo span {
-    font-size: 27px;
-}
-
-.logo h2 {
     color: #287cf0;
 }
 
-.search {
-    height: 46px;
 
-    max-width: 670px;
+.search-box {
+    width: 650px;
+    height: 45px;
 
-    flex: 1;
+    background: #f4f7fb;
 
-    background: #f5f8fd;
-
-    border: 1px solid #dce5f1;
+    border: 1px solid #dce5ef;
 
     border-radius: 30px;
 
@@ -66,44 +56,44 @@ body {
 
     padding: 0 18px;
 
-    color: #7d899b;
+    color: #77849a;
 }
 
-.search input {
-    border: none;
 
+.search-box input {
+    width: 100%;
+
+    border: none;
     outline: none;
 
     background: transparent;
-
-    width: 100%;
 
     margin-left: 10px;
 
     font-size: 15px;
 }
 
+
 .header-right {
     margin-left: auto;
 
     display: flex;
-
     align-items: center;
 
     gap: 20px;
 }
 
+
 .header-right button {
     border: none;
-
     background: transparent;
 
     cursor: pointer;
 }
 
-.my-profile {
-    display: flex;
 
+.my-profile-btn {
+    display: flex;
     align-items: center;
 
     gap: 8px;
@@ -111,7 +101,8 @@ body {
     font-weight: bold;
 }
 
-.my-profile span {
+
+.top-avatar {
     width: 40px;
     height: 40px;
 
@@ -126,16 +117,14 @@ body {
     color: white;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 }
 
 
-/* ================= LAYOUT ================= */
+/* ================= MAIN ================= */
 
-.layout {
+.main-layout {
     max-width: 1450px;
 
     margin: auto;
@@ -153,20 +142,19 @@ body {
 }
 
 
-/* ================= SIDEBAR ================= */
+/* ================= LEFT ================= */
 
-.sidebar {
+.left-sidebar {
     position: sticky;
-
-    top: 105px;
+    top: 100px;
 
     height: fit-content;
 }
 
-.menu {
-    width: 100%;
 
-    height: 55px;
+.nav-btn {
+    width: 100%;
+    height: 53px;
 
     border: none;
 
@@ -175,12 +163,11 @@ body {
     border-radius: 28px;
 
     display: flex;
-
     align-items: center;
 
-    gap: 18px;
+    gap: 17px;
 
-    padding: 0 22px;
+    padding: 0 20px;
 
     font-size: 16px;
 
@@ -191,26 +178,31 @@ body {
     text-align: left;
 }
 
-.menu:hover {
-    background: #e2ebfa;
+
+.nav-btn:hover {
+    background: #e1ebf8;
 }
 
-.menu.active {
+
+.nav-btn.active {
     background: linear-gradient(
         90deg,
-        #c9e3fb,
-        #ded5fa
+        #c8e4fb,
+        #ddd5fa
     );
 
-    color: #1175d9;
+    color: #1577d8;
+
+    font-weight: bold;
 }
 
-.post-btn {
+
+.side-post-button {
     width: 100%;
 
     height: 55px;
 
-    margin-top: 22px;
+    margin-top: 20px;
 
     border: none;
 
@@ -219,7 +211,7 @@ body {
     background: linear-gradient(
         90deg,
         #1888ee,
-        #7153ed
+        #7653ec
     );
 
     color: white;
@@ -232,30 +224,95 @@ body {
 }
 
 
-/* ================= CONTENT ================= */
-
-.page-title {
-    margin-bottom: 18px;
-}
-
-.page-title h1 {
-    font-size: 27px;
-}
-
-.page-title p {
-    color: #7b8799;
-
-    margin-top: 5px;
-}
+/* ================= PAGES ================= */
 
 .hidden {
     display: none !important;
 }
 
 
+.page-heading {
+    margin-bottom: 18px;
+}
+
+
+.page-heading h1 {
+    font-size: 28px;
+}
+
+
+.page-heading p {
+    color: #7d899b;
+
+    margin-top: 5px;
+}
+
+
+/* ================= AVATAR ================= */
+
+.avatar {
+    width: 50px;
+    height: 50px;
+
+    min-width: 50px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+
+    font-weight: bold;
+
+    font-size: 19px;
+}
+
+
+.purple {
+    background: linear-gradient(
+        135deg,
+        #8555e8,
+        #d653bb
+    );
+}
+
+
+.orange {
+    background: #f1a038;
+}
+
+
+.blue {
+    background: #3194e8;
+}
+
+
+.green {
+    background: #4fc875;
+}
+
+
+.pink {
+    background: #e86b9a;
+}
+
+
+.profile-click {
+    cursor: pointer;
+}
+
+
+.profile-click:hover {
+    opacity: 0.8;
+}
+
+
 /* ================= CREATE POST ================= */
 
-.create-post {
+.create-post-card {
     background: white;
 
     border-radius: 18px;
@@ -269,77 +326,35 @@ body {
     margin-bottom: 18px;
 
     box-shadow:
-        0 3px 12px rgba(40,60,90,.06);
+        0 3px 12px rgba(20,40,70,.06);
 }
 
-.avatar {
-    width: 48px;
-    height: 48px;
 
-    min-width: 48px;
-
-    border-radius: 50%;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    color: white;
-
-    font-weight: bold;
-
-    font-size: 18px;
+.create-post-area {
+    flex: 1;
 }
 
-.purple {
-    background: linear-gradient(
-        135deg,
-        #8555e8,
-        #d653bb
-    );
-}
 
-.orange {
-    background: #f2a13a;
-}
-
-.blue {
-    background: #3194e8;
-}
-
-.green {
-    background: #4dc878;
-}
-
-.pink {
-    background: #e76b9a;
-}
-
-.create-area {
-    width: 100%;
-}
-
-.create-area textarea {
+.create-post-area textarea {
     width: 100%;
 
     height: 55px;
 
     border: none;
 
-    border-bottom: 1px solid #e4e9ef;
-
-    outline: none;
+    border-bottom: 1px solid #e3e8ef;
 
     resize: none;
+
+    outline: none;
 
     font-family: Arial;
 
     font-size: 16px;
 
-    padding: 10px 0;
+    padding: 8px 0;
 }
+
 
 .create-bottom {
     display: flex;
@@ -351,38 +366,46 @@ body {
     padding-top: 10px;
 }
 
-.icons {
-    font-size: 18px;
 
-    word-spacing: 12px;
+.post-controls {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
 }
+
 
 #characterCount {
-    color: #7c899c;
-
-    margin-right: 12px;
+    color: #7d899b;
 }
 
-.publish {
+
+.post-button {
     border: none;
 
-    border-radius: 22px;
-
-    background: #2389ec;
+    background: #2389ed;
 
     color: white;
 
-    padding: 10px 22px;
-
     font-weight: bold;
+
+    padding: 10px 23px;
+
+    border-radius: 25px;
 
     cursor: pointer;
 }
 
 
+.post-button:hover {
+    background: #116fc9;
+}
+
+
 /* ================= POST ================= */
 
-.post {
+.post-card {
     background: white;
 
     border-radius: 18px;
@@ -396,46 +419,44 @@ body {
     margin-bottom: 18px;
 
     box-shadow:
-        0 3px 12px rgba(40,60,90,.06);
+        0 3px 12px rgba(20,40,70,.06);
 }
 
-.post-content {
+
+.post-main {
     flex: 1;
 }
 
-.post-header {
+
+.post-top {
     display: flex;
 
     justify-content: space-between;
+}
+
+
+.user-click {
+    display: flex;
 
     align-items: center;
+
+    gap: 5px;
 }
 
-.user-info {
-    cursor: pointer;
+
+.user-click strong {
+    font-size: 16px;
 }
 
-.user-info:hover strong {
-    text-decoration: underline;
-}
 
-.user-info span {
-    color: #7e8a9e;
+.user-click span {
+    color: #7b879a;
 
     font-size: 14px;
-
-    margin-left: 5px;
 }
 
-.profile-link {
-    cursor: pointer;
-}
 
-.profile-link:hover {
-    opacity: .8;
-}
-
-.more {
+.more-button {
     border: none;
 
     background: transparent;
@@ -443,11 +464,13 @@ body {
     cursor: pointer;
 }
 
-.post-text {
-    margin: 13px 0;
 
+.post-text {
     line-height: 1.6;
+
+    margin: 14px 0;
 }
+
 
 .post-actions {
     display: flex;
@@ -457,24 +480,36 @@ body {
     max-width: 500px;
 }
 
+
 .post-actions button {
     border: none;
 
     background: transparent;
 
-    cursor: pointer;
-
     color: #748198;
+
+    cursor: pointer;
 
     font-size: 14px;
 }
 
+
 .post-actions button:hover {
-    color: #1686ee;
+    color: #1685eb;
 }
 
 
-/* ================= RIGHT SIDEBAR ================= */
+.like-button.liked {
+    color: #e53e62;
+}
+
+
+.save-button.saved {
+    color: #7653e8;
+}
+
+
+/* ================= RIGHT ================= */
 
 .right-card {
     background: white;
@@ -486,14 +521,16 @@ body {
     margin-bottom: 18px;
 
     box-shadow:
-        0 3px 12px rgba(40,60,90,.06);
+        0 3px 12px rgba(20,40,70,.06);
 }
+
 
 .right-card h2 {
     font-size: 18px;
 
     margin-bottom: 17px;
 }
+
 
 .overview {
     display: grid;
@@ -504,6 +541,7 @@ body {
     gap: 8px;
 }
 
+
 .overview div {
     background: #f0f3ff;
 
@@ -511,24 +549,29 @@ body {
 
     text-align: center;
 
-    padding: 14px 5px;
+    padding: 14px 4px;
 }
 
-.overview b {
+
+.overview strong {
     display: block;
 
-    color: #7655e8;
+    color: #7254e8;
 
     font-size: 19px;
 
-    margin-bottom: 6px;
+    margin-bottom: 5px;
 }
 
-.overview small {
-    color: #718096;
+
+.overview span {
+    color: #738097;
+
+    font-size: 12px;
 }
 
-.right-heading {
+
+.right-title {
     display: flex;
 
     justify-content: space-between;
@@ -536,15 +579,17 @@ body {
     align-items: center;
 }
 
-.right-heading button {
+
+.right-title button {
     border: none;
 
     background: transparent;
 
-    color: #1686ee;
+    color: #1685eb;
 
     cursor: pointer;
 }
+
 
 .person {
     display: flex;
@@ -553,47 +598,56 @@ body {
 
     gap: 10px;
 
-    padding: 9px 5px;
+    padding: 8px 4px;
 
     border-radius: 10px;
 }
+
 
 .person:hover {
     background: #f5f8fc;
 }
 
-.person > div:nth-child(2) {
+
+.person-name {
     flex: 1;
 }
 
-.person small {
+
+.person-name strong {
     display: block;
-
-    color: #8190a4;
-
-    margin-top: 3px;
-
-    font-size: 12px;
 }
 
-.follow {
-    border: 1px solid #1686ee;
 
-    color: #1686ee;
+.person-name span {
+    display: block;
+
+    color: #7c899b;
+
+    font-size: 12px;
+
+    margin-top: 3px;
+}
+
+
+.follow-small {
+    border: 1px solid #1685eb;
 
     background: white;
 
-    border-radius: 20px;
+    color: #1685eb;
 
     padding: 7px 13px;
+
+    border-radius: 20px;
 
     cursor: pointer;
 }
 
 
-/* ================= PROFILE PAGE ================= */
+/* ================= PROFILE ================= */
 
-.profile-page {
+.profile-box {
     background: white;
 
     border-radius: 20px;
@@ -601,49 +655,49 @@ body {
     overflow: hidden;
 
     box-shadow:
-        0 3px 12px rgba(40,60,90,.07);
+        0 3px 12px rgba(20,40,70,.06);
 }
 
-.profile-cover {
+
+.cover {
     height: 200px;
 
     background: linear-gradient(
         120deg,
-        #8054e7,
-        #dc50a8,
-        #f69b4c
+        #8555e8,
+        #df50a8,
+        #f39b4c
     );
 }
+
 
 .user-cover {
     background: linear-gradient(
         120deg,
         #3194e8,
-        #8555e8,
+        #7653e8,
         #d653bb
     );
 }
 
-.profile-page-body {
-    padding: 25px;
 
-    position: relative;
+.profile-info {
+    padding: 25px;
 }
 
-.large-avatar {
-    width: 115px;
-    height: 115px;
 
-    margin-top: -80px;
+.large-avatar {
+    width: 110px;
+    height: 110px;
 
     border-radius: 50%;
+
+    margin-top: -80px;
 
     border: 5px solid white;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     color: white;
@@ -653,90 +707,99 @@ body {
     font-weight: bold;
 }
 
-.profile-page-body h1 {
+
+.profile-info h1 {
     margin-top: 15px;
 }
 
-.profile-page-body > p {
-    color: #758298;
+
+.profile-info > p {
+    color: #77849a;
 
     margin-top: 6px;
 }
 
-.profile-stats {
+
+.profile-info .bio {
+    color: #263246;
+
+    margin-top: 15px;
+}
+
+
+.stats {
     display: flex;
 
-    gap: 30px;
+    gap: 35px;
 
-    margin-top: 20px;
-
-    color: #758298;
+    margin-top: 22px;
 }
 
-.profile-stats b {
-    color: #172033;
 
-    margin-right: 4px;
+.stats div {
+    display: flex;
+
+    gap: 5px;
 }
 
-.edit-profile,
-.follow-user {
+
+.stats span {
+    color: #758299;
+}
+
+
+.follow-main {
     margin-top: 20px;
+
+    border: none;
+
+    background: #1685eb;
+
+    color: white;
+
+    padding: 10px 25px;
 
     border-radius: 22px;
 
-    padding: 10px 23px;
-
-    border: 1px solid #1686ee;
-
-    background: white;
-
-    color: #1686ee;
+    cursor: pointer;
 
     font-weight: bold;
-
-    cursor: pointer;
 }
 
-.follow-user {
-    background: #1686ee;
-
-    color: white;
-}
 
 .back-button {
     border: none;
 
-    background: white;
+    background: transparent;
 
-    color: #1686ee;
-
-    padding: 12px 5px;
-
-    margin-bottom: 10px;
+    color: #1685eb;
 
     font-size: 16px;
 
     cursor: pointer;
+
+    margin-bottom: 15px;
 }
 
-.user-posts-title {
+
+.profile-post-heading {
     margin: 25px 0 15px;
 }
 
 
 /* ================= EXPLORE ================= */
 
-.people-grid {
+.explore-grid {
     display: grid;
 
     grid-template-columns:
         repeat(2, 1fr);
 
-    gap: 15px;
+    gap: 18px;
 }
 
-.explore-user {
+
+.explore-card {
     background: white;
 
     border-radius: 18px;
@@ -745,35 +808,51 @@ body {
 
     text-align: center;
 
-    cursor: pointer;
-
     box-shadow:
-        0 3px 12px rgba(40,60,90,.06);
+        0 3px 12px rgba(20,40,70,.06);
 }
 
-.explore-user .avatar {
+
+.explore-card .avatar {
     margin: auto;
 }
 
-.explore-user h3 {
+
+.explore-card h2 {
     margin-top: 12px;
 }
 
-.explore-user p {
-    color: #7b8799;
 
-    margin-top: 5px;
+.explore-card p {
+    color: #7b879b;
+
+    margin: 5px 0 15px;
+}
+
+
+.explore-card button {
+    border: 1px solid #1685eb;
+
+    background: white;
+
+    color: #1685eb;
+
+    padding: 9px 18px;
+
+    border-radius: 20px;
+
+    cursor: pointer;
 }
 
 
 /* ================= MESSAGES ================= */
 
-.message-box {
+.message-card {
     background: white;
 
-    padding: 18px;
-
     border-radius: 15px;
+
+    padding: 18px;
 
     display: flex;
 
@@ -782,10 +861,26 @@ body {
     margin-bottom: 10px;
 }
 
-.message-box p {
-    color: #7b8799;
+
+.message-card p {
+    color: #7b879b;
 
     margin-top: 5px;
+}
+
+
+/* ================= SAVED ================= */
+
+.empty-message {
+    background: white;
+
+    padding: 40px;
+
+    text-align: center;
+
+    border-radius: 18px;
+
+    color: #7b879b;
 }
 
 
@@ -794,11 +889,11 @@ body {
 .toast {
     position: fixed;
 
-    left: 50%;
-
     bottom: 30px;
 
-    transform: translate(-50%, 70px);
+    left: 50%;
+
+    transform: translateX(-50%) translateY(80px);
 
     background: #172033;
 
@@ -812,13 +907,14 @@ body {
 
     transition: .3s;
 
-    z-index: 5000;
+    z-index: 9999;
 }
+
 
 .toast.show {
     opacity: 1;
 
-    transform: translate(-50%, 0);
+    transform: translateX(-50%) translateY(0);
 }
 
 
@@ -826,85 +922,80 @@ body {
 
 @media(max-width:1200px) {
 
-    .layout {
+    .main-layout {
         grid-template-columns:
             220px
-            minmax(450px, 1fr);
+            1fr;
     }
 
     .right-sidebar {
         display: none;
     }
 
-    .logo {
-        width: 220px;
-    }
 }
 
 
 @media(max-width:800px) {
 
-    .layout {
+    .main-layout {
         display: block;
 
         padding: 15px;
     }
 
-    .sidebar {
+
+    .left-sidebar {
         position: static;
 
         display: flex;
 
         flex-wrap: wrap;
 
-        margin-bottom: 15px;
+        gap: 5px;
+
+        margin-bottom: 20px;
     }
 
-    .menu {
+
+    .nav-btn {
         width: auto;
-
-        padding: 0 15px;
     }
 
-    .post-btn {
+
+    .side-post-button {
         width: auto;
 
         padding: 0 25px;
 
-        margin-top: 5px;
+        margin-top: 0;
     }
 
-    .header {
-        padding: 0 15px;
-    }
 
     .logo {
         width: auto;
+
+        margin-right: 15px;
     }
 
-    .logo h2 {
+
+    .search-box {
         display: none;
     }
 
-    .search {
-        margin-left: 15px;
-    }
 }
 
 
 @media(max-width:550px) {
 
-    .search {
-        display: none;
-    }
-
-    .people-grid {
+    .explore-grid {
         grid-template-columns: 1fr;
     }
 
-    .profile-stats {
+
+    .stats {
         gap: 12px;
 
         font-size: 13px;
     }
+
 }
